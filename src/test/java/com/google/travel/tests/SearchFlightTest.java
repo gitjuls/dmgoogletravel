@@ -2,9 +2,12 @@ package com.google.travel.tests;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.TestBase;
+import com.google.travel.pages.OneWay;
 import com.google.travel.pages.RoundTrip;
 import com.google.travel.pages.SearchFlight;
+import com.google.travel.pages.TripOption;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -18,11 +21,20 @@ public class SearchFlightTest extends TestBase {
        searchFlight = new SearchFlight(driver);
     }
 
-    @Test
-    public void test(){
+    @DataProvider
+    public Object[][] getData(){
+        return new Object[][]{
+                {"oneWay"},
+                {"roundTrip"},
+                //{"multiCity"}
+        };
+    }
+
+    @Test(dataProvider = "getData")
+    public void test(String tripOption){
         searchFlight.navigate();
-        searchFlight.setTripOption(new RoundTrip(driver));
-        searchFlight.clickBt();
+        searchFlight.setTripOption(TripOptionFactory.get(tripOption, driver));
+        searchFlight.clickSearchButton();
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 

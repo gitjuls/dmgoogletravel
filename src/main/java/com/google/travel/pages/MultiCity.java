@@ -3,17 +3,29 @@ package com.google.travel.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
-public class MultiCity implements TripOption{
+public class MultiCity extends AbstractComponent implements TripOption{
 
-    WebDriver driver;
-    WebDriverWait wait;
-
+    By changeTicketType = By.xpath("//*[@jsname='kj0dLd']//button[@aria-label='Round trip, Change ticket type.']");
+    By multiCity = By.xpath("//ul[@role='listbox'][@aria-label='Select your ticket type.']/li[3]");
     By addFlightButton = By.xpath("//button[@jsname='htvI8d']//*[contains(text(), 'Add flight')]");
-    By button = By.xpath("//button[@jsname='vLv7Lb']");
+
+    public MultiCity(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public void selectTicketType() {
+        WebElement changeTicketType = driver.findElement(this.changeTicketType);
+        this.wait.until(driver1 -> changeTicketType.isDisplayed());
+        changeTicketType.click();
+
+        WebElement multiCity = driver.findElement(this.multiCity);
+        this.wait.until(driver1 -> multiCity.isDisplayed());
+        multiCity.click();
+    }
 
     @Override
     public void inputSearchDetails(Map<String, String> searchDetail) {
@@ -29,13 +41,6 @@ public class MultiCity implements TripOption{
             whereTo.clear();
             whereTo.sendKeys(searchDetail.get("whereTo" + i));
         }
-    }
-
-    @Override
-    public void clickSearchButton() {
-        WebElement searchButton = driver.findElement(button);
-        this.wait.until(driver1 -> searchButton.isDisplayed());
-        searchButton.click();
     }
 
 }
