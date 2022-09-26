@@ -25,15 +25,15 @@ public class SearchFlightTest extends TestBase {
     @DataProvider
     public Object[][] getData(){
         Map<String, String> oneWayData = new HashMap<>();
-        oneWayData.put("whereFrom", "Washington");
-        oneWayData.put("whereTo", "Tampa");
+        oneWayData.put("whereFrom", "DCA");
+        oneWayData.put("whereTo", "TPA");
 
         Map<String, String> roundTrip = new HashMap<>();
-        roundTrip.put("whereFrom", "Washington");
-        roundTrip.put("whereTo", "Tampa");
+        roundTrip.put("whereFrom", "DCA");
+        roundTrip.put("whereTo", "LHR");
 
         return new Object[][]{
-               // {"oneWay", oneWayData},
+                {"oneWay", oneWayData},
                 {"roundTrip", roundTrip}
                 //{"multiCity"}
         };

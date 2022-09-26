@@ -7,9 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class RoundTrip extends AbstractComponent implements TripOption{
 
@@ -17,9 +18,6 @@ public class RoundTrip extends AbstractComponent implements TripOption{
     By whereTo = By.xpath("//*[@jsname='iOyk4d']//*[@placeholder='Where to?']");
     By changeTicketType = By.xpath("//*[@jsname='kj0dLd']//button[@aria-label='Round trip, Change ticket type.']");
     By roundTrip = By.xpath("//ul[@role='listbox'][@aria-label='Select your ticket type.']/li[1]");
-    By fromAirport = By.xpath("//ul[@role='listbox']/li[@data-code = 'DCA']");
-    By toAirport = By.xpath("//ul[@role='listbox']/li[@data-code = 'TPA']");
-
 
     public RoundTrip(WebDriver driver) {
         super(driver);
@@ -39,24 +37,26 @@ public class RoundTrip extends AbstractComponent implements TripOption{
     @Override
     public void inputSearchParameters(Map<String, String> searchDetail) {
         Actions actions = new Actions(driver);
+        String airportDataCode1 = searchDetail.get("whereFrom");
+        String airportDataCode2 = searchDetail.get("whereTo");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(this.whereFrom));
-        WebElement whereFrom = driver.findElement(this.whereFrom);
+        WebElement whereFrom = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(this.whereFrom)));
         whereFrom.clear();
-        actions.sendKeys(whereFrom,searchDetail.get("whereFrom")).build().perform();
+        actions.sendKeys(whereFrom,airportDataCode1).build().perform();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(this.fromAirport));
-        WebElement fromAirport = driver.findElement(this.fromAirport);
-        actions.moveToElement(fromAirport).click().build().perform();
+        WebElement whereFromAirportOption = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']"))));
+        actions.moveToElement(whereFromAirportOption).click().build().perform();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(this.whereTo));
-        WebElement whereTo = driver.findElement(this.whereTo);
+        WebElement whereTo = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(this.whereTo)));
         whereTo.clear();
-        actions.sendKeys(whereTo,searchDetail.get("whereTo")).build().perform();
+        actions.sendKeys(whereTo,airportDataCode2).build().perform();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(this.toAirport));
-        WebElement toAirport = driver.findElement(this.toAirport);
-        actions.moveToElement(toAirport).click().build().perform();
+        WebElement whereToAirportOption = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']"))));
+        actions.moveToElement(whereToAirportOption).click().build().perform();
     }
 
 }
