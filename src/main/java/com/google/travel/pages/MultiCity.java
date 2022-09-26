@@ -28,7 +28,7 @@ public class MultiCity extends AbstractComponent implements TripOption{
     }
 
     @Override
-    public void inputSearchDetails(Map<String, String> searchDetail) {
+    public void inputSearchParameters(Map<String, String> searchDetail) {
         int size = 2;
         for (int i = 1; i < size; i++) {
             WebElement whereFrom = driver.findElement(By.xpath("//*[@jsname='MOPQS']/div[" + i + "]//*[@jsname='FDWhSe']//input[@type='text'][@aria-labelledby]"));
