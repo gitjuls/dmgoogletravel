@@ -25,8 +25,8 @@ public class SearchFlight extends AbstractComponent{
         tripOption.selectTicketType();
     }
 
-    public void inputSearchParameters(Map<String, String> searchParam){
-        tripOption.inputSearchParameters(searchParam);
+    public void inputSearchData(Map<String, String> searchData){
+        tripOption.inputSearchData(searchData);
     }
 
     public void clickSearchButton() {

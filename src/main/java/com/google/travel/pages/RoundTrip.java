@@ -35,10 +35,10 @@ public class RoundTrip extends AbstractComponent implements TripOption{
     }
 
     @Override
-    public void inputSearchParameters(Map<String, String> searchDetail) {
+    public void inputSearchData(Map<String, String> searchData) {
         Actions actions = new Actions(driver);
-        String airportDataCode1 = searchDetail.get("whereFrom");
-        String airportDataCode2 = searchDetail.get("whereTo");
+        String airportDataCode1 = searchData.get("whereFrom");
+        String airportDataCode2 = searchData.get("whereTo");
 
         WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereFrom));
         whereFrom.clear();

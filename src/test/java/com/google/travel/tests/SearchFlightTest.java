@@ -37,6 +37,10 @@ public class SearchFlightTest extends TestBase {
         multiCity.put("whereTo1", "LHR");
         multiCity.put("whereFrom2", "TPA");
         multiCity.put("whereTo2", "LHR");
+        multiCity.put("whereFrom3", "TPA");
+        multiCity.put("whereTo3", "DCA");
+        multiCity.put("whereFrom4", "TPA");
+        multiCity.put("whereTo4", "DCA");
 
         return new Object[][]{
                // {"oneWay", oneWayData},
@@ -46,10 +50,10 @@ public class SearchFlightTest extends TestBase {
     }
 
     @Test(dataProvider = "getData")
-    public void test(String tripOption, Map<String, String> searchParameters){
+    public void test(String tripOption, Map<String, String> searchData){
         searchFlight.navigate();
         searchFlight.setTripOption(TripOptionFactory.get(tripOption, driver));
-        searchFlight.inputSearchParameters(searchParameters);
+        searchFlight.inputSearchData(searchData);
         searchFlight.clickSearchButton();
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
