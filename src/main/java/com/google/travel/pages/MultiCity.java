@@ -1,14 +1,11 @@
 package com.google.travel.pages;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class MultiCity extends AbstractComponent implements TripOption{
 
