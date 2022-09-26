@@ -37,9 +37,9 @@ public class MultiCity extends AbstractComponent implements TripOption{
         wait.until(driver1 -> addFlight.isDisplayed());
 
         Actions actions = new Actions(driver);
-        int size = searchData.size()/2;
+        int rowSize = searchData.size()/2;
 
-        for (int i = 1; i <= size; i++) {
+        for (int i = 1; i <= rowSize; i++) {
             WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + i + "]//*[@jsname='FDWhSe']//input[@type='text'][@aria-labelledby]")));
             whereFrom.clear();
             actions.sendKeys(whereFrom, searchData.get("whereFrom" + i)).build().perform();
@@ -54,10 +54,10 @@ public class MultiCity extends AbstractComponent implements TripOption{
             WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get("whereTo" + i) +"']")));
             actions.moveToElement(whereToAirportOption).click().build().perform();
 
-            //if input rows equal 2 or more (2 by default)
-            //and input rows don't equal the actual size of searchData
+            //if rows with input fields equal 2 or more (2 by default)
+            //and rows don't equal the actual rowSize of searchData
             //click addFlight button to add one more row for input searchData
-            if(i >= 2 && i != size){
+            if(i >= 2 && i != rowSize){
                 addFlight.click();
             }
         }
