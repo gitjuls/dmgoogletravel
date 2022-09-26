@@ -40,22 +40,18 @@ public class RoundTrip extends AbstractComponent implements TripOption{
         String airportDataCode1 = searchDetail.get("whereFrom");
         String airportDataCode2 = searchDetail.get("whereTo");
 
-        WebElement whereFrom = (new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(this.whereFrom)));
+        WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereFrom));
         whereFrom.clear();
         actions.sendKeys(whereFrom,airportDataCode1).build().perform();
 
-        WebElement whereFromAirportOption = (new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']"))));
+        WebElement whereFromAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']")));
         actions.moveToElement(whereFromAirportOption).click().build().perform();
 
-        WebElement whereTo = (new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(this.whereTo)));
+        WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereTo));
         whereTo.clear();
         actions.sendKeys(whereTo,airportDataCode2).build().perform();
 
-        WebElement whereToAirportOption = (new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']"))));
+        WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
         actions.moveToElement(whereToAirportOption).click().build().perform();
     }
 
