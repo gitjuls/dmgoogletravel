@@ -2,10 +2,7 @@ package com.google.travel.tests;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.TestBase;
-import com.google.travel.pages.OneWay;
-import com.google.travel.pages.RoundTrip;
-import com.google.travel.pages.SearchFlight;
-import com.google.travel.pages.TripOption;
+import com.google.travel.pages.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
