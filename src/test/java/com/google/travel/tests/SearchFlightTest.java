@@ -32,10 +32,16 @@ public class SearchFlightTest extends TestBase {
         roundTrip.put("whereFrom", "DCA");
         roundTrip.put("whereTo", "LHR");
 
+        Map<String, String> multiCity = new HashMap<>();
+        multiCity.put("whereFrom1", "DCA");
+        multiCity.put("whereTo1", "LHR");
+        multiCity.put("whereFrom2", "TPA");
+        multiCity.put("whereTo2", "LHR");
+
         return new Object[][]{
-                {"oneWay", oneWayData},
-                {"roundTrip", roundTrip}
-                //{"multiCity"}
+               // {"oneWay", oneWayData},
+               // {"roundTrip", roundTrip},
+                {"multiCity", multiCity}
         };
     }
 
