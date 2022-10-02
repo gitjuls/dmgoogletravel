@@ -22,16 +22,16 @@ public class SearchFlight extends AbstractComponent{
 
     public void setTripOption(TripOption tripOption){
         this.tripOption = tripOption;
-        tripOption.selectTicketType();
     }
 
     public void inputSearchData(Map<String, String> searchData){
         tripOption.inputSearchData(searchData);
     }
 
-    public void clickSearchButton() {
+    public SearchResult clickSearchButton() {
         WebElement searchButton = driver.findElement(button);
         wait.until(driver1 -> searchButton.isDisplayed());
         searchButton.click();
+        return new SearchResult(driver);
     }
 }

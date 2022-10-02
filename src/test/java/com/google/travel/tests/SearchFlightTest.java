@@ -6,9 +6,6 @@ import com.google.travel.pages.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.collections.Maps;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -16,11 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class SearchFlightTest extends TestBase {
 
     private SearchFlight searchFlight;
-
-    @BeforeTest
-    public void setSearchFlight(){
-       searchFlight = new SearchFlight(driver);
-    }
+    private SearchResult searchResult;
 
     @DataProvider
     public Object[][] getData(){
@@ -28,33 +21,35 @@ public class SearchFlightTest extends TestBase {
         oneWayData.put("whereFrom", "DCA");
         oneWayData.put("whereTo", "TPA");
 
-        Map<String, String> roundTrip = new HashMap<>();
-        roundTrip.put("whereFrom", "DCA");
-        roundTrip.put("whereTo", "LHR");
+        Map<String, String> roundTripData = new HashMap<>();
+        roundTripData.put("whereFrom", "DCA");
+        roundTripData.put("whereTo", "LHR");
 
-        Map<String, String> multiCity = new HashMap<>();
-        multiCity.put("whereFrom1", "DCA");
-        multiCity.put("whereTo1", "LHR");
-        multiCity.put("whereFrom2", "TPA");
-        multiCity.put("whereTo2", "LHR");
-        multiCity.put("whereFrom3", "TPA");
-        multiCity.put("whereTo3", "DCA");
-        multiCity.put("whereFrom4", "TPA");
-        multiCity.put("whereTo4", "DCA");
+        Map<String, String> multiCityData = new HashMap<>();
+        multiCityData.put("whereFrom1", "DCA");
+        multiCityData.put("whereTo1", "LHR");
+        multiCityData.put("whereFrom2", "TPA");
+        multiCityData.put("whereTo2", "LHR");
+        multiCityData.put("whereFrom3", "TPA");
+        multiCityData.put("whereTo3", "DCA");
+        multiCityData.put("whereFrom4", "TPA");
+        multiCityData.put("whereTo4", "DCA");
 
         return new Object[][]{
-               // {"oneWay", oneWayData},
-               // {"roundTrip", roundTrip},
-                {"multiCity", multiCity}
+                {"oneWay", oneWayData},
+                {"roundTrip", roundTripData},
+                {"multiCity", multiCityData}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void test(String tripOption, Map<String, String> searchData){
+    public void test(String ticketType, Map<String, String> searchData){
+        searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
-        searchFlight.setTripOption(TripOptionFactory.get(tripOption, driver));
+        searchFlight.setTripOption(TripOptionFactory.get(ticketType, driver));
         searchFlight.inputSearchData(searchData);
-        searchFlight.clickSearchButton();
+        searchResult = searchFlight.clickSearchButton();
+        searchResult.getTripOption();
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 

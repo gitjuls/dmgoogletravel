@@ -9,23 +9,13 @@ import java.util.Map;
 
 public class MultiCity extends AbstractComponent implements TripOption{
 
-    By changeTicketType = By.xpath("//*[@jsname='kj0dLd']//button[@aria-label='Round trip, Change ticket type.']");
-    By multiCity = By.xpath("//ul[@role='listbox'][@aria-label='Select your ticket type.']/li[3]");
+    private TicketType ticketType;
     By addFlight = By.xpath("//button[@jsname='htvI8d']//*[contains(text(), 'Add flight')]");
 
     public MultiCity(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    public void selectTicketType() {
-        WebElement changeTicketType = driver.findElement(this.changeTicketType);
-        wait.until(driver1 -> changeTicketType.isDisplayed());
-        changeTicketType.click();
-
-        WebElement multiCity = driver.findElement(this.multiCity);
-        wait.until(driver1 -> multiCity.isDisplayed());
-        multiCity.click();
+        this.ticketType = new TicketType(driver);
+        ticketType.selectTicketType(3); //multiCity
     }
 
     @Override
