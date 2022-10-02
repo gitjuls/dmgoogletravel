@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class RoundTrip extends AbstractComponent implements TripOption{
@@ -38,6 +42,13 @@ public class RoundTrip extends AbstractComponent implements TripOption{
 
         WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
         actions.moveToElement(whereToAirportOption).click().build().perform();
+    }
+
+    @Override
+    public List<String> getInputSearchData() {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, "one", "two", "three");
+        return list;
     }
 
 }

@@ -32,6 +32,6 @@ public class SearchFlight extends AbstractComponent{
         WebElement searchButton = driver.findElement(button);
         wait.until(driver1 -> searchButton.isDisplayed());
         searchButton.click();
-        return new SearchResult(driver);
+        return new SearchResult(driver, tripOption);
     }
 }

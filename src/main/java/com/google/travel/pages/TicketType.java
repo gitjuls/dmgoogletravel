@@ -28,8 +28,15 @@ public class TicketType extends AbstractComponent{
     public String getTicketType(){
         WebElement ticketTypeButton = driver.findElement(this.ticketTypeButton);
         wait.until(driver1 -> ticketTypeButton.isDisplayed());
-        String ticketType = ticketTypeButton.getAttribute("aria-label").trim().toLowerCase();
-        return ticketType;
+        String ticketType = ticketTypeButton.getAttribute("aria-label").trim();
+        return replaceChar(ticketType);
+    }
+
+    private String replaceChar(String ticketType) {
+        String r1 = ticketType.replaceAll(", Change ticket type.", "");
+        String r2 = r1.replaceAll("-","");
+        String r3 = r2.replaceAll(" ", "");
+        return r3;
     }
 
 }

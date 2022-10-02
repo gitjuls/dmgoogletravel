@@ -3,10 +3,13 @@ package com.google.travel.tests;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.TestBase;
 import com.google.travel.pages.*;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -30,26 +33,28 @@ public class SearchFlightTest extends TestBase {
         multiCityData.put("whereTo1", "LHR");
         multiCityData.put("whereFrom2", "TPA");
         multiCityData.put("whereTo2", "LHR");
-        multiCityData.put("whereFrom3", "TPA");
+        /*multiCityData.put("whereFrom3", "TPA");
         multiCityData.put("whereTo3", "DCA");
         multiCityData.put("whereFrom4", "TPA");
-        multiCityData.put("whereTo4", "DCA");
+        multiCityData.put("whereTo4", "DCA");*/
 
         return new Object[][]{
-                {"oneWay", oneWayData},
-                {"roundTrip", roundTripData},
+               /* {"oneWay", oneWayData},
+                {"roundTrip", roundTripData},*/
                 {"multiCity", multiCityData}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void test(String ticketType, Map<String, String> searchData){
+    public void test(String expectedTicketType, Map<String, String> searchData){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
-        searchFlight.setTripOption(TripOptionFactory.get(ticketType, driver));
+        searchFlight.setTripOption(TripOptionFactory.get(expectedTicketType, driver));
         searchFlight.inputSearchData(searchData);
         searchResult = searchFlight.clickSearchButton();
-        searchResult.getTripOption();
+        String actualTicketType = searchResult.getTicketType();
+        Assert.assertEquals(actualTicketType.toLowerCase(), expectedTicketType.toLowerCase());
+        searchResult.getInputSearchData().stream().forEach(System.out::println);
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
