@@ -4,6 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TripOption {
-    void inputSearchData(Map<String,String> searchData);
+    void inputSearchData(List<String> searchData);
     List<String> getInputSearchData();
 }

@@ -8,10 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -22,52 +20,53 @@ public class SearchFlightTest extends TestBase {
 
     @DataProvider
     public Object[][] getData(){
-        Map<String, String> oneWayData = new HashMap<>();
-        oneWayData.put("whereFrom", "DCA");
-        oneWayData.put("whereTo", "TPA");
+        List<String> oneWayData = new ArrayList<>();
+        Collections.addAll(oneWayData, "DCA", "TPA");
 
-        Map<String, String> roundTripData = new HashMap<>();
-        roundTripData.put("whereFrom", "DCA");
-        roundTripData.put("whereTo", "LHR");
+        List<String> roundTripData = new ArrayList<>();
+        Collections.addAll(roundTripData, "DCA", "LHR");
 
-        Map<String, String> multiCityData = new HashMap<>();
+        List<String> multiCityData = new ArrayList<>();
+        Collections.addAll(multiCityData, "DCA", "LHR", "TPA", "LHR");
+
+        /*Map<String, String> multiCityData = new HashMap<>();
         multiCityData.put("whereFrom1", "DCA");
         multiCityData.put("whereTo1", "LHR");
         multiCityData.put("whereFrom2", "TPA");
-        multiCityData.put("whereTo2", "LHR");
+        multiCityData.put("whereTo2", "LHR");*/
         /*multiCityData.put("whereFrom3", "TPA");
         multiCityData.put("whereTo3", "DCA");
         multiCityData.put("whereFrom4", "TPA");
         multiCityData.put("whereTo4", "DCA");*/
 
         return new Object[][]{
-             //   {"oneWay", oneWayData},
-                {"roundTrip", roundTripData}//,
-               // {"multiCity", multiCityData}
+               // {"oneWay", oneWayData},
+               // {"roundTrip", roundTripData}//,
+                {"multiCity", multiCityData}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void test1(String expectedTicketType, Map<String, String> searchData){
+    public void test1(String expectedTicketType, List<String> searchData){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
         searchFlight.setTripOption(TripOptionFactory.get(expectedTicketType, driver));
         searchFlight.inputSearchData(searchData);
-        searchResult = searchFlight.clickSearchButton();
-        String actualTicketType = searchResult.getTicketType();
-        Assert.assertEquals(actualTicketType.toLowerCase(), expectedTicketType.toLowerCase());
+        //searchResult = searchFlight.clickSearchButton();
+        //String actualTicketType = searchResult.getTicketType();
+        //Assert.assertEquals(actualTicketType.toLowerCase(), expectedTicketType.toLowerCase());
        // Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
     @Test(dataProvider = "getData")
-    public void test2(String expectedTicketType, Map<String, String> searchData){
+    public void test2(String expectedTicketType, List<String> searchData){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
         searchFlight.setTripOption(TripOptionFactory.get(expectedTicketType, driver));
         searchFlight.inputSearchData(searchData);
         searchResult = searchFlight.clickSearchButton();
         List<String> actualCodeList = searchResult.getInputSearchData().stream().collect(Collectors.toList());
-        String actual = null;
+       /* String actual = null;
         String expected = null;
         for (String code : searchData.values()){
             expected = code;
@@ -77,7 +76,7 @@ public class SearchFlightTest extends TestBase {
             actual = code;
             System.out.println("actual " + actual);
         }
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual,expected);*/
     }
 
     @Test(dataProvider = "getData")

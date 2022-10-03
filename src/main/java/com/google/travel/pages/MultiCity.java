@@ -22,26 +22,30 @@ public class MultiCity extends AbstractComponent implements TripOption{
     }
 
     @Override
-    public void inputSearchData(Map<String, String> searchData) {
+    public void inputSearchData(List<String> searchData) {
         WebElement addFlight = driver.findElement(this.addFlight);
         wait.until(driver1 -> addFlight.isDisplayed());
 
         Actions actions = new Actions(driver);
         int rowSize = searchData.size()/2;
 
-        for (int i = 1; i <= rowSize; i++) {
-            WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + i + "]//*[@jsname='FDWhSe']//input[@type='text'][@aria-labelledby]")));
-            whereFrom.clear();
-            actions.sendKeys(whereFrom, searchData.get("whereFrom" + i)).build().perform();
+        for (int i = 0, j = i+1; i <= rowSize; i=i+2, j=i+1) {
+            /*System.out.println("rowsize "+ rowSize);
+            System.out.println("i " + searchData.get(i));
+            System.out.println("j "+ searchData.get(j));*/
 
-            WebElement whereFromAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get("whereFrom" + i) +"']")));
+            WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + j + "]//*[@jsname='FDWhSe']//input[@type='text'][@aria-labelledby]")));
+            whereFrom.clear();
+            actions.sendKeys(whereFrom, searchData.get(i)).build().perform();
+
+            WebElement whereFromAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get(i) +"']")));
             actions.moveToElement(whereFromAirportOption).click().build().perform();
 
-            WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + i + "]//*[@jsname='iOyk4d']//input[@value][@aria-labelledby]")));
+            WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + j + "]//*[@jsname='iOyk4d']//input[@value][@aria-labelledby]")));
             whereTo.clear();
-            actions.sendKeys(whereTo, searchData.get("whereTo" + i)).build().perform();
+            actions.sendKeys(whereTo, searchData.get(++j)).build().perform();
 
-            WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get("whereTo" + i) +"']")));
+            WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get(j) +"']")));
             actions.moveToElement(whereToAirportOption).click().build().perform();
 
             //if rows with input fields equal 2 or more (2 by default)

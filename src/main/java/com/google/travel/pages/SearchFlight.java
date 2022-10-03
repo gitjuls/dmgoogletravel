@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
 import java.util.Map;
 
 public class SearchFlight extends AbstractComponent{
@@ -24,7 +25,7 @@ public class SearchFlight extends AbstractComponent{
         this.tripOption = tripOption;
     }
 
-    public void inputSearchData(Map<String, String> searchData){
+    public void inputSearchData(List<String> searchData){
         tripOption.inputSearchData(searchData);
     }
 
