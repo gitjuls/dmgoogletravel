@@ -1,15 +1,14 @@
 package com.google.travel.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RoundTrip extends AbstractComponent implements TripOption{
 
@@ -46,9 +45,11 @@ public class RoundTrip extends AbstractComponent implements TripOption{
 
     @Override
     public List<String> getInputSearchData() {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, "one", "two", "three");
-        return list;
+        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='rIZzse']/*[@jsname='snKmsc']//*[@jsname='brjg8b']//span[3]")));
+        List<String> result = listOfInputFields.stream()
+                .map(el -> ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el).toString())
+                .collect(Collectors.toList());
+        return result;
     }
 
 }

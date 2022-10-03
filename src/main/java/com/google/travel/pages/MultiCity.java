@@ -55,8 +55,8 @@ public class MultiCity extends AbstractComponent implements TripOption{
 
     @Override
     public List<String> getInputSearchData(){
-        List<WebElement> whereFrom = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@jsname='MOPQS']/div//*[@jsname='FDWhSe']//*[@jsname = 'brjg8b']//span[3]")));
-        List<String> result = whereFrom.stream()
+        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@jsname='MOPQS']//*[@jsname='brjg8b']//span[3]")));
+        List<String> result = listOfInputFields.stream()
                 .map(el -> ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el).toString())
                 .collect(Collectors.toList());
         return result;

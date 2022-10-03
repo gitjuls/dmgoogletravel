@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-
 public class TestBase {
     public WebDriver driver;
 
@@ -15,6 +14,7 @@ public class TestBase {
     @Parameters("browser")
     public void setDriver(@Optional("chrome") String browser){
         driver = DriverFactory.getDriver(browser);
+        driver.manage().window().maximize();
     }
 
     @AfterTest

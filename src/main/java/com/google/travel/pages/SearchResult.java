@@ -20,8 +20,7 @@ public class SearchResult extends AbstractComponent{
     }
 
     public List<String> getInputSearchData(){
-        List<String> result = tripOption.getInputSearchData().stream().collect(Collectors.toList());
-        return result;
+        return tripOption.getInputSearchData().stream().collect(Collectors.toList());
     }
 
 }
