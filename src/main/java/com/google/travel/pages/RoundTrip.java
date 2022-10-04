@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RoundTrip extends AbstractComponent implements TripOption{
@@ -44,7 +43,7 @@ public class RoundTrip extends AbstractComponent implements TripOption{
     }
 
     @Override
-    public List<String> getInputSearchData() {
+    public List<String> getSearchData() {
         List<WebElement> listOfInputFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='rIZzse']/*[@jsname='snKmsc']//*[@jsname='brjg8b']//span[3]")));
         List<String> result = listOfInputFields.stream()
                 .map(el -> ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el).toString())

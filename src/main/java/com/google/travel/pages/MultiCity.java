@@ -7,12 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MultiCity extends AbstractComponent implements TripOption{
 
     private TicketType ticketType;
+    By inputFields = By.xpath("//*[@jsname='MOPQS']//*[@jsname='pT3pqd']//input");
+    By dropDownList = By.xpath("//div[@jsname='rymPhb']/ul/li[1]");
     By addFlight = By.xpath("//button[@jsname='htvI8d']//*[contains(text(), 'Add flight')]");
 
     public MultiCity(WebDriver driver) {
@@ -27,38 +28,24 @@ public class MultiCity extends AbstractComponent implements TripOption{
         wait.until(driver1 -> addFlight.isDisplayed());
 
         Actions actions = new Actions(driver);
-        int rowSize = searchData.size()/2;
 
-        for (int i = 0, j = i+1; i <= rowSize; i=i+2, j=i+1) {
-            /*System.out.println("rowsize "+ rowSize);
-            System.out.println("i " + searchData.get(i));
-            System.out.println("j "+ searchData.get(j));*/
-
-            WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + j + "]//*[@jsname='FDWhSe']//input[@type='text'][@aria-labelledby]")));
-            whereFrom.clear();
-            actions.sendKeys(whereFrom, searchData.get(i)).build().perform();
-
-            WebElement whereFromAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get(i) +"']")));
-            actions.moveToElement(whereFromAirportOption).click().build().perform();
-
-            WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@jsname='MOPQS']/div[" + j + "]//*[@jsname='iOyk4d']//input[@value][@aria-labelledby]")));
-            whereTo.clear();
-            actions.sendKeys(whereTo, searchData.get(++j)).build().perform();
-
-            WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ searchData.get(j) +"']")));
-            actions.moveToElement(whereToAirportOption).click().build().perform();
-
-            //if rows with input fields equal 2 or more (2 by default)
-            //and rows don't equal the actual rowSize of searchData
-            //click addFlight button to add one more row for input searchData
-            if(i >= 2 && i != rowSize){
+        int rows = searchData.size()/2;
+        if(rows > 2){
+            for (int i = 1; i <= rows-2 ; i++) {
                 addFlight.click();
             }
+        }
+        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(inputFields, 2));
+        for (int i = 0; i < searchData.size(); i++) {
+            listOfInputFields.get(i).clear();
+            actions.sendKeys(listOfInputFields.get(i), searchData.get(i)).build().perform();
+            WebElement dropDownList = wait.until(ExpectedConditions.presenceOfElementLocated(this.dropDownList));
+            actions.moveToElement(dropDownList).click().build().perform();
         }
     }
 
     @Override
-    public List<String> getInputSearchData(){
+    public List<String> getSearchData(){
         List<WebElement> listOfInputFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@jsname='MOPQS']//*[@jsname='brjg8b']//span[3]")));
         List<String> result = listOfInputFields.stream()
                 .map(el -> ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el).toString())

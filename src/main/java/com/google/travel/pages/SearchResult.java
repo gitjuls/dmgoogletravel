@@ -19,8 +19,8 @@ public class SearchResult extends AbstractComponent{
         return this.ticketType.getTicketType();
     }
 
-    public List<String> getInputSearchData(){
-        return tripOption.getInputSearchData().stream().collect(Collectors.toList());
+    public List<String> getSearchData(){
+        return tripOption.getSearchData().stream().collect(Collectors.toList());
     }
 
 }
