@@ -14,9 +14,9 @@ public class TripOptionFactory {
     private static final Map<String,Function<WebDriver, TripOption>> MAP = new HashMap<>();
 
     static {
-        MAP.put("oneWay", ONE_WAY);
-        MAP.put("roundTrip", ROUND_TRIP);
-        MAP.put("multiCity", MULTI_CITY);
+        MAP.put("One way", ONE_WAY);
+        MAP.put("Round trip", ROUND_TRIP);
+        MAP.put("Multi-city", MULTI_CITY);
     }
 
     public static TripOption get(String option, WebDriver driver){

@@ -15,28 +15,34 @@ public class TicketType extends AbstractComponent{
         super(driver);
     }
 
-    public void selectTicketType(int index){
+    private TripOption tripOption;
+
+    private void setTripOption(TripOption tripOption){
+        this.tripOption = tripOption;
+    }
+
+    public TripOption selectTicketType(String ticketType){
         WebElement ticketTypeButton = driver.findElement(this.ticketTypeButton);
         wait.until(driver1 -> ticketTypeButton.isDisplayed());
         ticketTypeButton.click();
 
         List<WebElement> listOfTicketTypes = driver.findElements(this.listOfTicketTypes);
         wait.until((driver) -> listOfTicketTypes.size() > 2);
-        listOfTicketTypes.get(index-1).click();
+        for (WebElement el: listOfTicketTypes) {
+            if(el.getText().contains(ticketType)){
+                el.click();
+            }
+        }
+
+        setTripOption(TripOptionFactory.get(ticketType, driver));
+        return tripOption;
     }
 
     public String getTicketType(){
         WebElement ticketTypeButton = driver.findElement(this.ticketTypeButton);
         wait.until(driver1 -> ticketTypeButton.isDisplayed());
         String ticketType = ticketTypeButton.getAttribute("aria-label").trim();
-        return replaceChar(ticketType);
-    }
-
-    private String replaceChar(String ticketType) {
-        String r1 = ticketType.replaceAll(", Change ticket type.", "");
-        String r2 = r1.replaceAll("-","");
-        String r3 = r2.replaceAll(" ", "");
-        return r3;
+        return ticketType;
     }
 
 }

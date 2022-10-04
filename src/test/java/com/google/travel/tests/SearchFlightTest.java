@@ -28,29 +28,29 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(multiCityData, "DCA", "LHR", "TPA", "LHR", "TPA", "DCA");
 
         return new Object[][]{
-                {"oneWay", oneWayData},
-                {"roundTrip", roundTripData},
-                {"multiCity", multiCityData}
+               // {"One way", oneWayData},
+               // {"Round trip", roundTripData},
+                {"Multi-city", multiCityData}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void verifyIfSelectedTicketTypeMatchWithResult(String expectedTicketType, List<String> searchByCode){
+    public void verifyIfSelectedTicketTypeMatchWithResult(String ticketType, List<String> searchByCode){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
-        searchFlight.setTripOption(TripOptionFactory.get(expectedTicketType, driver));
+        searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
         searchResult = searchFlight.clickSearchButton();
         String actualTicketType = searchResult.getTicketType();
-        Assert.assertEquals(actualTicketType.toLowerCase(), expectedTicketType.toLowerCase());
-        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        Assert.assertTrue(actualTicketType.contains(ticketType));
+        //Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
     @Test(dataProvider = "getData")
-    public void verifyIfInputDataMatchWithResult(String expectedTicketType, List<String> searchByCode){
+    public void verifyIfInputDataMatchWithResult(String ticketType, List<String> searchByCode){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
-        searchFlight.setTripOption(TripOptionFactory.get(expectedTicketType, driver));
+        searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
         searchResult = searchFlight.clickSearchButton();
         List<String> actualCode = searchResult.getSearchData().stream().collect(Collectors.toList());

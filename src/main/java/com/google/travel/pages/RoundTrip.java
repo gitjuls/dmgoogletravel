@@ -11,14 +11,11 @@ import java.util.stream.Collectors;
 
 public class RoundTrip extends AbstractComponent implements TripOption{
 
-    private TicketType ticketType;
     By whereFrom = By.xpath("//*[@jsname='snKmsc']//*[@jsname='FDWhSe']//input[@value][@aria-labelledby]");
     By whereTo = By.xpath("//*[@jsname='iOyk4d']//*[@placeholder='Where to?']");
 
     public RoundTrip(WebDriver driver) {
         super(driver);
-        this.ticketType = new TicketType(driver);
-        ticketType.selectTicketType(1); //roundTrip
     }
 
     @Override

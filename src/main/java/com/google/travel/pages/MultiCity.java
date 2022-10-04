@@ -11,15 +11,12 @@ import java.util.stream.Collectors;
 
 public class MultiCity extends AbstractComponent implements TripOption{
 
-    private TicketType ticketType;
     By inputFields = By.xpath("//*[@jsname='MOPQS']//*[@jsname='pT3pqd']//input");
     By dropDownList = By.xpath("//div[@jsname='rymPhb']/ul/li[1]");
     By addFlight = By.xpath("//button[@jsname='htvI8d']//*[contains(text(), 'Add flight')]");
 
     public MultiCity(WebDriver driver) {
         super(driver);
-        this.ticketType = new TicketType(driver);
-        ticketType.selectTicketType(3); //multiCity
     }
 
     @Override
