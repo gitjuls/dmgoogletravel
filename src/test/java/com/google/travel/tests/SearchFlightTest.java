@@ -28,9 +28,9 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(multiCityData, "DCA", "LHR", "TPA", "LHR", "TPA", "DCA");
 
         return new Object[][]{
-               // {"One way", oneWayData},
+                {"One way", oneWayData}
                // {"Round trip", roundTripData},
-                {"Multi-city", multiCityData}
+               // {"Multi-city", multiCityData}
         };
     }
 
@@ -57,6 +57,18 @@ public class SearchFlightTest extends TestBase {
         for(int i=0; i<actualCode.size(); i++){
             Assert.assertEquals(actualCode.get(i),searchByCode.get(i));
         }
+    }
+
+    @Test(dataProvider = "getData")
+    public void sortBy(String ticketType, List<String> searchByCode) {
+        searchFlight = new SearchFlight(driver);
+        searchFlight.navigate();
+        searchFlight.selectTicketType(ticketType);
+        searchFlight.inputSearchData(searchByCode);
+        searchResult = searchFlight.clickSearchButton();
+        searchResult.clickSortByButton();
+        searchResult.sortBy("price");
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
 }

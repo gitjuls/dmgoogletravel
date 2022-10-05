@@ -1,11 +1,13 @@
 package com.google.travel.pages;
 
+import com.google.travel.pages.tripOption.ticketType.TicketType;
+import com.google.travel.pages.tripOption.TripOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class SearchFlight extends AbstractComponent{
+public class SearchFlight extends BasePageObject {
 
     By button = By.xpath("//button[@jsname='vLv7Lb']");
 

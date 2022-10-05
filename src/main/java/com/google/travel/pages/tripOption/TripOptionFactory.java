@@ -1,5 +1,8 @@
-package com.google.travel.pages;
+package com.google.travel.pages.tripOption;
 
+import com.google.travel.pages.tripOption.ticketType.MultiCity;
+import com.google.travel.pages.tripOption.ticketType.OneWay;
+import com.google.travel.pages.tripOption.ticketType.RoundTrip;
 import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 import java.util.Map;

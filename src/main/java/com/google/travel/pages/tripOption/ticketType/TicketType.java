@@ -1,12 +1,15 @@
-package com.google.travel.pages;
+package com.google.travel.pages.tripOption.ticketType;
 
+import com.google.travel.pages.BasePageObject;
+import com.google.travel.pages.tripOption.TripOption;
+import com.google.travel.pages.tripOption.TripOptionFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class TicketType extends AbstractComponent{
+public class TicketType extends BasePageObject {
 
     By ticketTypeButton = By.xpath("//button[contains(@aria-label, 'Change ticket type.')]");
     By listOfTicketTypes = By.xpath("//ul[@role='listbox'][@aria-label='Select your ticket type.']/li");

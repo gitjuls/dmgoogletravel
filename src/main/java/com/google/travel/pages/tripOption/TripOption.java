@@ -1,4 +1,4 @@
-package com.google.travel.pages;
+package com.google.travel.pages.tripOption;
 
 import java.util.List;
 
