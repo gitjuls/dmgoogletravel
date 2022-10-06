@@ -2,6 +2,7 @@ package com.google.travel.tests;
 
 import com.google.travel.pages.SearchFlight;
 import com.google.travel.pages.SearchResult;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +22,9 @@ public class SearchFlightAction {
 
     public static final Consumer<SearchResult> getTicketType = searchResult -> searchResult.getTicketType();
     public static final Consumer<SearchResult> getSearchData = searchResult -> searchResult.getSearchData();
+    public static final Consumer<SearchResult> clickSortByButton = searchResult -> searchResult.clickSortByButton();
+    public static final Consumer<SearchResult> sortByPrice = searchResult -> searchResult.sortBy("price");
+    public static final Consumer<SearchResult> assertMinPrice = searchResult -> Assert.assertEquals(searchResult.getTheFirstFlightPriceFromTheList(), searchResult.getTheMinFlightPrice());
 
     public static List<String> dataProvider(String str){
         List<String> oneWayData = new ArrayList<>();

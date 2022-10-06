@@ -60,7 +60,7 @@ public class SearchFlightTest extends TestBase {
     }
 
     @Test(dataProvider = "getData")
-    public void sortBy(String ticketType, List<String> searchByCode) {
+    public void verifyIfSortedByMinPriceIsMatch(String ticketType, List<String> searchByCode) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
@@ -69,9 +69,8 @@ public class SearchFlightTest extends TestBase {
         searchResult.clickSortByButton();
         searchResult.sortBy("price");
         int firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
-        int minPrice = searchResult.getTheMinFlightPrice();
-        System.out.println(minPrice + " " + firstPriceFromTheSortedList);
-        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        int minPriceFromTheList = searchResult.getTheMinFlightPrice();
+        Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
     }
 
 }

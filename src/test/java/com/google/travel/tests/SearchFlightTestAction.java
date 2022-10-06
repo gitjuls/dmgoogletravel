@@ -25,19 +25,17 @@ public class SearchFlightTestAction extends TestBase {
     @DataProvider(name="provider")
     public Object[][] testData(){
         return new Object[][]{
-                {oneWay.andThen(oneWayData)}
+                {oneWay.andThen(oneWayData),clickSortByButton.andThen(sortByPrice).andThen(assertMinPrice) }
                /* {roundTrip.andThen(roundTripData).andThen(clickSearchButton)},
                 {multiCity.andThen(multiCityData).andThen(clickSearchButton)}*/
         };
     }
 
     @Test(dataProvider = "provider")
-    public void testName(Consumer<SearchFlight> consumer) {
+    public void testName(Consumer<SearchFlight> searchConsumer, Consumer<SearchResult> resultConsumer) {
         searchFlight.navigate();
-        consumer.accept(searchFlight);
+        searchConsumer.accept(searchFlight);
         searchResult = searchFlight.clickSearchButton();
-        String actualTicketType = searchResult.getTicketType();
-        Assert.assertTrue(actualTicketType.contains("One way"));
-        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+        resultConsumer.accept(searchResult);
     }
 }
