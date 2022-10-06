@@ -1,5 +1,6 @@
 package com.google.travel.pages;
 
+import com.google.travel.pages.flightsList.FlightsList;
 import com.google.travel.pages.sortBy.SortBy;
 import com.google.travel.pages.tripOption.ticketType.TicketType;
 import com.google.travel.pages.tripOption.TripOption;
@@ -12,12 +13,14 @@ public class SearchResult extends BasePageObject {
     private TicketType ticketType;
     private TripOption tripOption;
     private SortBy sortBy;
+    private FlightsList flightsList;
 
     public SearchResult(WebDriver driver, TripOption tripOption) {
         super(driver);
         this.ticketType = new TicketType(driver);
         this.tripOption = tripOption;
         this.sortBy = new SortBy(driver);
+        this.flightsList = new FlightsList(driver);
     }
 
     public String getTicketType(){
@@ -28,5 +31,7 @@ public class SearchResult extends BasePageObject {
     }
     public void clickSortByButton(){sortBy.clickSortByButton();}
     public void sortBy(String menuItem){sortBy.sortByMenuItem(menuItem);}
+    public int getTheFirstFlightPriceFromTheList(){ return flightsList.getTheFirstFlightPriceFromTheList();}
+    public int getTheMinFlightPrice(){ return flightsList.getTheMinFlightPrice();}
 
 }

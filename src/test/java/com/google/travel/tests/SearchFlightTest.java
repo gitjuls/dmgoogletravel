@@ -68,6 +68,9 @@ public class SearchFlightTest extends TestBase {
         searchResult = searchFlight.clickSearchButton();
         searchResult.clickSortByButton();
         searchResult.sortBy("price");
+        int firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
+        int minPrice = searchResult.getTheMinFlightPrice();
+        System.out.println(minPrice + " " + firstPriceFromTheSortedList);
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
