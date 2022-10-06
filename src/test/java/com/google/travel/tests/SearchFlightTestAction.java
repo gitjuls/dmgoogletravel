@@ -25,9 +25,7 @@ public class SearchFlightTestAction extends TestBase {
     @DataProvider(name="provider")
     public Object[][] testData(){
         return new Object[][]{
-                {oneWay.andThen(oneWayData),clickSortByButton.andThen(sortByPrice).andThen(assertMinPrice) }
-               /* {roundTrip.andThen(roundTripData).andThen(clickSearchButton)},
-                {multiCity.andThen(multiCityData).andThen(clickSearchButton)}*/
+                {selectOneWayTripAndInputData.andThen(clickSearchButton),selectSortByPrice.andThen(assertMinPrice) }
         };
     }
 
