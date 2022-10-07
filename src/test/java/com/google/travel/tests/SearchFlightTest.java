@@ -25,12 +25,12 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(roundTripData, "DCA", "LHR");
 
         List<String> multiCityData = new ArrayList<>();
-        Collections.addAll(multiCityData, "DCA", "LHR", "TPA", "LHR", "TPA", "DCA");
+        Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
 
         return new Object[][]{
-                {"One way", oneWayData}
-               // {"Round trip", roundTripData},
-               // {"Multi-city", multiCityData}
+               // {"One way", oneWayData},
+                {"Round trip", roundTripData}
+              //  {"Multi-city", multiCityData}
         };
     }
 
@@ -71,6 +71,20 @@ public class SearchFlightTest extends TestBase {
         int firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
         int minPriceFromTheList = searchResult.getTheMinFlightPrice();
         Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
+    }
+
+    @Test(dataProvider = "getData")
+    public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
+        searchFlight = new SearchFlight(driver);
+        searchFlight.navigate();
+        searchFlight.selectTicketType(ticketType);
+        searchFlight.inputSearchData(searchByCode);
+        searchResult = searchFlight.clickSearchButton();
+        searchResult.clickSortByButton();
+        searchResult.sortBy("duration");
+        String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
+        String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
+        Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
     }
 
 }

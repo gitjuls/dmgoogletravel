@@ -33,5 +33,7 @@ public class SearchResult extends BasePageObject {
     public void sortBy(String menuItem){sortBy.sortByMenuItem(menuItem);}
     public int getTheFirstFlightPriceFromTheList(){ return flightsList.getTheFirstFlightPriceFromTheList();}
     public int getTheMinFlightPrice(){ return flightsList.getTheMinFlightPrice();}
+    public String getTheMinDurationTime(){ return flightsList.getTheMinDurationTime();}
+    public String getTheFirstDurationTimeFromTheList(){ return flightsList.getTheFirstDurationTimeFromTheList();}
 
 }

@@ -1,9 +1,11 @@
 package com.google.travel.pages.sortBy;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.pages.BasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public class SortBy extends BasePageObject {
@@ -25,5 +27,6 @@ public class SortBy extends BasePageObject {
         List<WebElement> sortByMenuItem = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.sortByMenuItems, 2));
         Predicate<WebElement> predicate = SortByCriteriaFactory.selectMenuItem(menuItem);
         sortByMenuItem.stream().filter(predicate).findFirst().get().click();
+        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
     }
 }
