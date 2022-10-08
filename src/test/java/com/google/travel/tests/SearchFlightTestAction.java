@@ -1,6 +1,5 @@
 package com.google.travel.tests;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.TestBase;
 import com.google.travel.pages.SearchFlight;
 import com.google.travel.pages.SearchResult;
@@ -8,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import static com.google.travel.tests.SearchFlightAction.*;
 
