@@ -37,19 +37,20 @@ public class FlightsList extends BasePageObject {
                 .filter(el -> el.getText().contains("$"))
                 .limit(10)
                 .map(el -> el.getText().trim())
-                .map(price -> price.replace("$", "").replace(",","."))
+                .map(price -> price.replace("$", ""))
                 .collect(Collectors.toList());
-
-        /** price equal 1,000 and more **/
-        OptionalDouble minPriceDouble = priceList.stream()
-                .filter(price -> price.contains("."))
-                .mapToDouble(price -> Double.valueOf(price))
-                .min();
 
         /** price equal 999 and less **/
         OptionalInt minPriceInt = priceList.stream()
-                .filter(price -> !price.contains("."))
+                .filter(price -> price.length() <= 3)
                 .mapToInt(price -> Integer.valueOf(price))
+                .min();
+
+        /** price equal 1,000 and more **/
+        OptionalDouble minPriceDouble = priceList.stream()
+                .filter(price -> price.contains(","))
+                .map(price -> price.replace(",","."))
+                .mapToDouble(price -> Double.valueOf(price))
                 .min();
 
         return String.valueOf(minPriceInt.isPresent()? minPriceInt.getAsInt() : minPriceDouble.getAsDouble());
