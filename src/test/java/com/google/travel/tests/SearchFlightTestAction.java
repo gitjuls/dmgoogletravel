@@ -20,20 +20,37 @@ public class SearchFlightTestAction extends TestBase {
     @BeforeTest
     public void setTest() {
         this.searchFlight = new SearchFlight(driver);
+        this.searchResult = new SearchResult(driver);
     }
 
     @DataProvider(name="provider")
     public Object[][] testData(){
         return new Object[][]{
-                {selectOneWayTripAndInputData.andThen(clickSearchButton),selectSortByPrice.andThen(assertMinPrice) }
+                {selectOneWayTripAndInputData.andThen(clickSearchButton) }
         };
     }
 
     @Test(dataProvider = "provider")
-    public void testName(Consumer<SearchFlight> searchConsumer, Consumer<SearchResult> resultConsumer) {
+    public void verifyIfSortedByMinPriceIsMatch(Consumer<SearchFlight> searchConsumer) {
         searchFlight.navigate();
         searchConsumer.accept(searchFlight);
-        searchResult = searchFlight.clickSearchButton();
-        resultConsumer.accept(searchResult);
+        searchResult.clickSortByButton();
+        searchResult.sortBy("price");
+        String firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
+        String minPriceFromTheList = searchResult.getTheMinFlightPrice();
+        Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
+
+    }
+
+    @Test(dataProvider = "provider")
+    public void verifyIfSortedByMinDurationTimeIsMatch(Consumer<SearchFlight> searchConsumer) {
+        searchFlight.navigate();
+        searchConsumer.accept(searchFlight);
+        searchResult.clickSortByButton();
+        searchResult.sortBy("duration");
+        String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
+        String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
+        Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
+
     }
 }

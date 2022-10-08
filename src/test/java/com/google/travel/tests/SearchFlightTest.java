@@ -34,7 +34,7 @@ public class SearchFlightTest extends TestBase {
         };
     }
 
-    @Test(dataProvider = "getData")
+/*    @Test(dataProvider = "getData")
     public void verifyIfSelectedTicketTypeMatchWithResult(String ticketType, List<String> searchByCode){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -44,9 +44,9 @@ public class SearchFlightTest extends TestBase {
         String actualTicketType = searchResult.getTicketType();
         Assert.assertTrue(actualTicketType.contains(ticketType));
         //Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
-    }
+    }*/
 
-    @Test(dataProvider = "getData")
+/*    @Test(dataProvider = "getData")
     public void verifyIfInputDataMatchWithResult(String ticketType, List<String> searchByCode){
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -57,7 +57,7 @@ public class SearchFlightTest extends TestBase {
         for(int i=0; i<actualCode.size(); i++){
             Assert.assertEquals(actualCode.get(i),searchByCode.get(i));
         }
-    }
+    }*/
 
     @Test(dataProvider = "getData")
     public void verifyIfSortedByMinPriceIsMatch(String ticketType, List<String> searchByCode) {
@@ -68,8 +68,8 @@ public class SearchFlightTest extends TestBase {
         searchResult = searchFlight.clickSearchButton();
         searchResult.clickSortByButton();
         searchResult.sortBy("price");
-        int firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
-        int minPriceFromTheList = searchResult.getTheMinFlightPrice();
+        String firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
+        String minPriceFromTheList = searchResult.getTheMinFlightPrice();
         Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
     }
 

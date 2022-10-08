@@ -19,42 +19,45 @@ public class FlightsList extends BasePageObject {
         super(driver);
     }
 
-    public int getTheFirstFlightPriceFromTheList(){
+    public String getTheFirstFlightPriceFromTheList(){
         List<WebElement> flightPrice = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightPrice, 2));
-        int firstPrice = flightPrice.stream()
+        Optional<String> firstPrice = flightPrice.stream()
                 .filter(el -> el.getText().contains("$"))
                 .findFirst()
                 .map(el -> el.getText().trim())
-                .map(el -> el.replace("$", ""))
-                .map(price -> Integer.parseInt(price))
-                .get();
-        return firstPrice;
+                .map(el -> el.replace("$", ""));
+        if(firstPrice.isPresent()){
+            return firstPrice.get();
+        }
+        return "_";
     }
 
-    public int getTheMinFlightPrice(){
+    public String getTheMinFlightPrice(){
         List<WebElement> flightPrice = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightPrice, 4));
         OptionalInt minPrice = flightPrice.stream()
                 .filter(el -> el.getText().contains("$"))
+                .limit(10)
                 .map(el -> el.getText().trim())
                 .map(price -> price.replace("$", ""))
                 .mapToInt(price -> Integer.parseInt(price))
                 .min();
-        return minPrice.getAsInt();
+        return String.valueOf(minPrice.getAsInt());
     }
 
     public String getTheMinDurationTime(){
         List<WebElement> totalDurationList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightDuration, 4));
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
         List<String> listOfDurationContainsHoursAndMinutes = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> el.getText().contains("min"))
+                .limit(5)
                 .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
                 .collect(Collectors.toList());
 
         List<String> listOfDurationContainsOnlyHours = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> !el.getText().contains("min"))
+                .limit(5)
                 .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
                 .collect(Collectors.toList());
 
@@ -65,13 +68,14 @@ public class FlightsList extends BasePageObject {
         OptionalLong minDurationTimeInMilliSeconds = listOfDurationTime.stream()
                 .flatMap(l->l.stream())
                 .map(el -> {
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                     Date date = new Date();
                     try {date = format.parse(el);}
                     catch (ParseException e) {e.printStackTrace();}
                     return date.getTime(); // get time in milliSeconds;
                 })
                 .mapToLong(time -> time)
-                .max();
+                .min();
 
         return new SimpleDateFormat("H:mm").format( new Date(minDurationTimeInMilliSeconds.getAsLong())).toString();
     }
@@ -79,21 +83,19 @@ public class FlightsList extends BasePageObject {
     public String getTheFirstDurationTimeFromTheList(){
         List<WebElement> totalDurationList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightDuration, 4));
 
-        String firstDurationTimeThatContainsHoursAndMinutes = totalDurationList.stream()
+        Optional<String> firstDurationTimeThatContainsHoursAndMinutes = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> el.getText().contains("min"))
                 .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
-                .findFirst()
-                .get();
+                .findFirst();
 
-        String firstDurationTimeThatContainsOnlyHours = totalDurationList.stream()
+        Optional<String> firstDurationTimeThatContainsOnlyHours = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> !el.getText().contains("min"))
                 .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
-                .findFirst()
-                .get();
+                .findFirst();
 
-        return firstDurationTimeThatContainsHoursAndMinutes != null ? firstDurationTimeThatContainsHoursAndMinutes : firstDurationTimeThatContainsOnlyHours;
+        return firstDurationTimeThatContainsHoursAndMinutes.isPresent() ? firstDurationTimeThatContainsHoursAndMinutes.get() : firstDurationTimeThatContainsOnlyHours.get();
     }
 
 }

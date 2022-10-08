@@ -35,6 +35,6 @@ public class SearchFlight extends BasePageObject {
         WebElement searchButton = driver.findElement(button);
         wait.until(driver1 -> searchButton.isDisplayed());
         searchButton.click();
-        return new SearchResult(driver, tripOption);
+        return new SearchResult(driver);
     }
 }

@@ -22,8 +22,8 @@ public class SearchFlightAction {
     public static final Consumer<SearchFlight> selectOneWayTripAndInputData = oneWay.andThen(oneWayData);
     public static final Consumer<SearchFlight> clickSearchButton = searchFlight -> searchFlight.clickSearchButton();
 
-    public static final Consumer<SearchResult> getTicketType = searchResult -> searchResult.getTicketType();
-    public static final Consumer<SearchResult> getSearchData = searchResult -> searchResult.getSearchData();
+   // public static final Consumer<SearchResult> getTicketType = searchResult -> searchResult.getTicketType();
+   // public static final Consumer<SearchResult> getSearchData = searchResult -> searchResult.getSearchData();
 
     private static final Consumer<SearchResult> clickSortByButton = searchResult -> searchResult.clickSortByButton();
     private static final Consumer<SearchResult> sortByPrice = searchResult -> searchResult.sortBy("price");
