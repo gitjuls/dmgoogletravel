@@ -24,7 +24,9 @@ public class SearchFlightTestAction extends TestBase {
     @DataProvider(name="provider")
     public Object[][] testData(){
         return new Object[][]{
-                {selectOneWayTripAndInputData.andThen(clickSearchButton) }
+                {selectOneWayTripAndInputData.andThen(clickSearchButton)},
+                {selectRoundTripAndInputData.andThen(clickSearchButton)},
+               // {selectMultiCityTripAndInputData.andThen(clickSearchButton)}
         };
     }
 

@@ -20,21 +20,21 @@ public class SearchFlightAction {
     private static final Consumer<SearchFlight>  multiCityData = searchFlight -> searchFlight.inputSearchData(dataProvider("multiCityData"));
 
     public static final Consumer<SearchFlight> selectOneWayTripAndInputData = oneWay.andThen(oneWayData);
+    public static final Consumer<SearchFlight> selectRoundTripAndInputData = roundTrip.andThen(roundTripData);
+    public static final Consumer<SearchFlight> selectMultiCityTripAndInputData = multiCity.andThen(multiCityData);
     public static final Consumer<SearchFlight> clickSearchButton = searchFlight -> searchFlight.clickSearchButton();
 
-   // public static final Consumer<SearchResult> getTicketType = searchResult -> searchResult.getTicketType();
-   // public static final Consumer<SearchResult> getSearchData = searchResult -> searchResult.getSearchData();
-
-    private static final Consumer<SearchResult> clickSortByButton = searchResult -> searchResult.clickSortByButton();
-    private static final Consumer<SearchResult> sortByPrice = searchResult -> searchResult.sortBy("price");
-
-    public static final Consumer<SearchResult> selectSortByPrice = clickSortByButton.andThen(sortByPrice);
-
-    public static final Consumer<SearchResult> assertMinPrice = searchResult -> Assert.assertEquals(searchResult.getTheFirstFlightPriceFromTheList(), searchResult.getTheMinFlightPrice());
-
     public static List<String> dataProvider(String str){
-        List<String> oneWayData = new ArrayList<>();
-        Collections.addAll(oneWayData, "DCA", "TPA");
-        return oneWayData;
+        List<String> data = new ArrayList<>();
+            if(str == "oneWayData") {
+                Collections.addAll(data, "DCA", "TPA");
+            }
+            if(str == "roundTrip") {
+                Collections.addAll(data, "DCA", "LHR");
+            }
+            if(str == "multiCityData"){
+                Collections.addAll(data, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
+            }
+        return data;
     }
 }

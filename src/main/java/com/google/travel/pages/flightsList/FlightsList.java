@@ -21,27 +21,38 @@ public class FlightsList extends BasePageObject {
 
     public String getTheFirstFlightPriceFromTheList(){
         List<WebElement> flightPrice = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightPrice, 2));
-        Optional<String> firstPrice = flightPrice.stream()
+        String firstPrice = flightPrice.stream()
                 .filter(el -> el.getText().contains("$"))
                 .findFirst()
                 .map(el -> el.getText().trim())
-                .map(el -> el.replace("$", ""));
-        if(firstPrice.isPresent()){
-            return firstPrice.get();
-        }
-        return "_";
+                .map(el -> el.replace("$", "").replace(",","."))
+                .get();
+
+        return firstPrice;
     }
 
     public String getTheMinFlightPrice(){
         List<WebElement> flightPrice = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightPrice, 4));
-        OptionalInt minPrice = flightPrice.stream()
+        List<String> priceList = flightPrice.stream()
                 .filter(el -> el.getText().contains("$"))
                 .limit(10)
                 .map(el -> el.getText().trim())
-                .map(price -> price.replace("$", ""))
-                .mapToInt(price -> Integer.parseInt(price))
+                .map(price -> price.replace("$", "").replace(",","."))
+                .collect(Collectors.toList());
+
+        /** price equal 1,000 and more **/
+        OptionalDouble minPriceDouble = priceList.stream()
+                .filter(price -> price.contains("."))
+                .mapToDouble(price -> Double.valueOf(price))
                 .min();
-        return String.valueOf(minPrice.getAsInt());
+
+        /** price equal 999 and less **/
+        OptionalInt minPriceInt = priceList.stream()
+                .filter(price -> !price.contains("."))
+                .mapToInt(price -> Integer.valueOf(price))
+                .min();
+
+        return String.valueOf(minPriceInt.isPresent()? minPriceInt.getAsInt() : minPriceDouble.getAsDouble());
     }
 
     public String getTheMinDurationTime(){

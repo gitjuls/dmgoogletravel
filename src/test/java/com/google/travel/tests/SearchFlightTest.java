@@ -28,9 +28,9 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
 
         return new Object[][]{
-               // {"One way", oneWayData},
+                {"One way", oneWayData},
                 {"Round trip", roundTripData}
-              //  {"Multi-city", multiCityData}
+                //{"Multi-city", multiCityData}
         };
     }
 
