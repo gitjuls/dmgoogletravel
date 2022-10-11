@@ -19,7 +19,7 @@ public class SortBy extends BasePageObject {
     }
 
     public void clickSortByButton(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(this.popUpMenu)).click();
+        //wait.until(ExpectedConditions.presenceOfElementLocated(this.popUpMenu)).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(this.sortByButton)).click();
     }
 

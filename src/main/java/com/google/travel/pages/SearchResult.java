@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchResult extends BasePageObject {
 
-    private TicketType ticketType;
     private SortBy sortBy;
     private FlightsList flightsList;
 
@@ -18,7 +17,6 @@ public class SearchResult extends BasePageObject {
 
     public SearchResult(WebDriver driver) {
         super(driver);
-        this.ticketType = new TicketType(driver);
         this.sortBy = new SortBy(driver);
         this.flightsList = new FlightsList(driver);
     }

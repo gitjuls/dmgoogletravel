@@ -48,12 +48,12 @@ public class FlightsList extends BasePageObject {
 
         /** price equal 1,000 and more **/
         OptionalDouble minPriceDouble = priceList.stream()
-                .filter(price -> price.contains(","))
+                .filter(price -> price.length() >= 4)
                 .map(price -> price.replace(",","."))
                 .mapToDouble(price -> Double.valueOf(price))
                 .min();
 
-        return String.valueOf(minPriceInt.isPresent()? minPriceInt.getAsInt() : minPriceDouble.getAsDouble());
+        return minPriceInt.isPresent()? minPriceInt.getAsInt()+"" : minPriceDouble.getAsDouble()+"";
     }
 
     public String getTheMinDurationTime(){
@@ -62,14 +62,14 @@ public class FlightsList extends BasePageObject {
         List<String> listOfDurationContainsHoursAndMinutes = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> el.getText().contains("min"))
-                .limit(5)
+               // .limit(5)
                 .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
                 .collect(Collectors.toList());
 
         List<String> listOfDurationContainsOnlyHours = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> !el.getText().contains("min"))
-                .limit(5)
+                //.limit(5)
                 .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
                 .collect(Collectors.toList());
 
@@ -89,7 +89,7 @@ public class FlightsList extends BasePageObject {
                 .mapToLong(time -> time)
                 .min();
 
-        return new SimpleDateFormat("H:mm").format( new Date(minDurationTimeInMilliSeconds.getAsLong())).toString();
+        return new SimpleDateFormat("HH:mm").format( new Date(minDurationTimeInMilliSeconds.getAsLong())).toString();
     }
 
     public String getTheFirstDurationTimeFromTheList(){
@@ -107,7 +107,7 @@ public class FlightsList extends BasePageObject {
                 .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
                 .findFirst();
 
-        return firstDurationTimeThatContainsHoursAndMinutes.isPresent() ? firstDurationTimeThatContainsHoursAndMinutes.get() : firstDurationTimeThatContainsOnlyHours.get();
+        return firstDurationTimeThatContainsHoursAndMinutes.isPresent() ? firstDurationTimeThatContainsHoursAndMinutes.get()+"" : firstDurationTimeThatContainsOnlyHours.get()+"";
     }
 
 }

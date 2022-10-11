@@ -31,6 +31,18 @@ public class SearchFlightTestAction extends TestBase {
     }
 
     @Test(dataProvider = "provider")
+    public void verifySearchResult(Consumer<SearchFlight> searchConsumer) {
+        searchFlight.navigate();
+        searchConsumer.accept(searchFlight);
+        searchResult.clickSortByButton();
+        searchResult.sortBy("price");
+        String firstPriceFromTheSortedList = searchResult.getTheFirstFlightPriceFromTheList();
+        String minPriceFromTheList = searchResult.getTheMinFlightPrice();
+        Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
+
+    }
+
+    @Test(dataProvider = "provider")
     public void verifyIfSortedByMinPriceIsMatch(Consumer<SearchFlight> searchConsumer) {
         searchFlight.navigate();
         searchConsumer.accept(searchFlight);

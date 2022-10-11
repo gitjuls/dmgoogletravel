@@ -20,33 +20,53 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(oneWayData, "DCA", "TPA");
 
         List<String> roundTripData = new ArrayList<>();
-        Collections.addAll(roundTripData, "DCA", "LHR");
-
-        List<String> roundTripDataNoResults = new ArrayList<>();
-        Collections.addAll(roundTripDataNoResults, "DCA", "KBP");
+        Collections.addAll(roundTripData, "DCA", "IXZ");
 
         List<String> multiCityData = new ArrayList<>();
         Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
 
         return new Object[][]{
-                {"One way", oneWayData, "results returned."},
-                {"Round trip", roundTripData, "results returned."},
-                {"Round trip", roundTripDataNoResults, "No results returned."},
-                {"Multi-city", multiCityData, "results returned."}
+                {"One way", oneWayData},
+                {"Round trip", roundTripData},
+             //   {"Multi-city", multiCityData}
+        };
+    }
+
+    @DataProvider
+    public Object[][] getData2(){
+        List<String> roundTripDataAlternativeSuggestionsFound = new ArrayList<>();
+        Collections.addAll(roundTripDataAlternativeSuggestionsFound, "DCA", "ISL");
+
+        List<String> roundTripDataNoResults = new ArrayList<>();
+        Collections.addAll(roundTripDataNoResults, "DCA", "KBP");
+
+        return new Object[][]{
+                {"Round trip", roundTripDataAlternativeSuggestionsFound, "No results returned, alternative suggestions found."},
+                {"Round trip", roundTripDataNoResults, "No results returned."}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void verifySearchResult(String ticketType, List<String> searchByCode, String expectedResult) {
+    public void verifyIfSearchResultsReturned(String ticketType, List<String> searchByCode) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
-        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
         searchResult = searchFlight.clickSearchButton();
         String ExpectedResult = searchResult.searchResult();
-        Assert.assertTrue(ExpectedResult.contains(expectedResult));
-        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        Assert.assertFalse(ExpectedResult.equalsIgnoreCase("No results"));
+      //  Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+    }
+
+    @Test(dataProvider = "getData2")
+    public void verifyIfSearchResultsReturnedNoResultsOrAlternativeSuggestions(String ticketType, List<String> searchByCode, String expectedAlert) {
+        searchFlight = new SearchFlight(driver);
+        searchFlight.navigate();
+        searchFlight.selectTicketType(ticketType);
+        searchFlight.inputSearchData(searchByCode);
+        searchResult = searchFlight.clickSearchButton();
+        String ExpectedResult = searchResult.searchResult();
+        Assert.assertTrue(ExpectedResult.equalsIgnoreCase(expectedAlert));
     }
 
     @Test(dataProvider = "getData")
