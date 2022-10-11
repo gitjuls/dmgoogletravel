@@ -24,13 +24,17 @@ public class SearchFlightTest extends TestBase {
         List<String> roundTripData = new ArrayList<>();
         Collections.addAll(roundTripData, "DCA", "LHR");
 
+        List<String> roundTripDataNoResults = new ArrayList<>();
+        Collections.addAll(roundTripDataNoResults, "DCA", "KBP");
+
         List<String> multiCityData = new ArrayList<>();
         Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
 
         return new Object[][]{
-                {"One way", oneWayData},
-                {"Round trip", roundTripData}
-                //{"Multi-city", multiCityData}
+                {"One way", oneWayData, "results returned."},
+                {"Round trip", roundTripData, "results returned."},
+                {"Round trip", roundTripDataNoResults, "No results returned."},
+                {"Multi-city", multiCityData, "results returned."}
         };
     }
 
@@ -58,6 +62,19 @@ public class SearchFlightTest extends TestBase {
             Assert.assertEquals(actualCode.get(i),searchByCode.get(i));
         }
     }*/
+
+    @Test(dataProvider = "getData")
+    public void verifySearchResult(String ticketType, List<String> searchByCode, String expectedResult) {
+        searchFlight = new SearchFlight(driver);
+        searchFlight.navigate();
+        searchFlight.selectTicketType(ticketType);
+        searchFlight.inputSearchData(searchByCode);
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        searchResult = searchFlight.clickSearchButton();
+        String ExpectedResult = searchResult.searchResult();
+        Assert.assertTrue(ExpectedResult.contains(expectedResult));
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+    }
 
     @Test(dataProvider = "getData")
     public void verifyIfSortedByMinPriceIsMatch(String ticketType, List<String> searchByCode) {

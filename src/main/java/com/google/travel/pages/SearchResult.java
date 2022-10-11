@@ -4,7 +4,11 @@ import com.google.travel.pages.flightsList.FlightsList;
 import com.google.travel.pages.sortBy.SortBy;
 import com.google.travel.pages.tripOption.ticketType.TicketType;
 import com.google.travel.pages.tripOption.TripOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +19,19 @@ public class SearchResult extends BasePageObject {
     private SortBy sortBy;
     private FlightsList flightsList;
 
+    By searchResult = By.xpath("//*[@role='main']//*[@role='alert']");
+
     public SearchResult(WebDriver driver) {
         super(driver);
         this.ticketType = new TicketType(driver);
        // this.tripOption = tripOption;
         this.sortBy = new SortBy(driver);
         this.flightsList = new FlightsList(driver);
+    }
+
+    public String searchResult(){
+        WebElement searchResult = wait.until(ExpectedConditions.presenceOfElementLocated(this.searchResult));
+        return searchResult.getText();
     }
 
     //public String getTicketType(){return this.ticketType.getTicketType();}
