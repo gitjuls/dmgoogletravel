@@ -41,11 +41,4 @@ public class TicketType extends BasePageObject {
         return tripOption;
     }
 
-    public String getTicketType(){
-        WebElement ticketTypeButton = driver.findElement(this.ticketTypeButton);
-        wait.until(driver1 -> ticketTypeButton.isDisplayed());
-        String ticketType = ticketTypeButton.getAttribute("aria-label").trim();
-        return ticketType;
-    }
-
 }

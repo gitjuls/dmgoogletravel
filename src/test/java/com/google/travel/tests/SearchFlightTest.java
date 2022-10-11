@@ -6,10 +6,8 @@ import com.google.travel.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class SearchFlightTest extends TestBase {
 
@@ -37,31 +35,6 @@ public class SearchFlightTest extends TestBase {
                 {"Multi-city", multiCityData, "results returned."}
         };
     }
-
-/*    @Test(dataProvider = "getData")
-    public void verifyIfSelectedTicketTypeMatchWithResult(String ticketType, List<String> searchByCode){
-        searchFlight = new SearchFlight(driver);
-        searchFlight.navigate();
-        searchFlight.selectTicketType(ticketType);
-        searchFlight.inputSearchData(searchByCode);
-        searchResult = searchFlight.clickSearchButton();
-        String actualTicketType = searchResult.getTicketType();
-        Assert.assertTrue(actualTicketType.contains(ticketType));
-        //Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
-    }*/
-
-/*    @Test(dataProvider = "getData")
-    public void verifyIfInputDataMatchWithResult(String ticketType, List<String> searchByCode){
-        searchFlight = new SearchFlight(driver);
-        searchFlight.navigate();
-        searchFlight.selectTicketType(ticketType);
-        searchFlight.inputSearchData(searchByCode);
-        searchResult = searchFlight.clickSearchButton();
-        List<String> actualCode = searchResult.getSearchData().stream().collect(Collectors.toList());
-        for(int i=0; i<actualCode.size(); i++){
-            Assert.assertEquals(actualCode.get(i),searchByCode.get(i));
-        }
-    }*/
 
     @Test(dataProvider = "getData")
     public void verifySearchResult(String ticketType, List<String> searchByCode, String expectedResult) {

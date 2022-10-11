@@ -3,13 +3,11 @@ package com.google.travel.pages.tripOption.ticketType;
 import com.google.travel.pages.BasePageObject;
 import com.google.travel.pages.tripOption.TripOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RoundTrip extends BasePageObject implements TripOption {
 
@@ -39,15 +37,6 @@ public class RoundTrip extends BasePageObject implements TripOption {
 
         WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
         actions.moveToElement(whereToAirportOption).click().build().perform();
-    }
-
-    @Override
-    public List<String> getSearchData() {
-        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='rIZzse']/*[@jsname='snKmsc']//*[@jsname='brjg8b']//span[3]")));
-        List<String> result = listOfInputFields.stream()
-                .map(el -> ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el).toString())
-                .collect(Collectors.toList());
-        return result;
     }
 
 }
