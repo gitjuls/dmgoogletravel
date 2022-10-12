@@ -57,7 +57,7 @@ public class FlightsList extends BasePageObject {
 
         DecimalFormat df = new DecimalFormat("#.000");
 
-        return minPriceInt.isPresent() ? minPriceInt.getAsInt()+"" : df.format(minPriceDouble.getAsDouble());
+        return minPriceInt.isPresent() ? String.valueOf(minPriceInt.getAsInt()) : String.valueOf(df.format(minPriceDouble.getAsDouble()));
     }
 
     public String getTheMinDurationTime(){
