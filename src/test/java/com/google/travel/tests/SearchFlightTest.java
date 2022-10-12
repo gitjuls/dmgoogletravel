@@ -21,7 +21,7 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(roundTripData, "DCA", "TLV");
 
         List<String> multiCityData = new ArrayList<>();
-        Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
+        Collections.addAll(multiCityData, "DCA", "TPA", "TPA", "JFK", "JFK", "DCA");
 
         return new Object[][]{
                 {"One way", oneWayData},
