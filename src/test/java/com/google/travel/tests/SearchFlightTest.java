@@ -33,8 +33,8 @@ public class SearchFlightTest extends TestBase {
 
         return new Object[][]{
                 {"One way", oneWayData},
-                {"Round trip", roundTripData}
-             //   {"Multi-city", multiCityData}
+                {"Round trip", roundTripData},
+                {"Multi-city", multiCityData}
         };
     }
 

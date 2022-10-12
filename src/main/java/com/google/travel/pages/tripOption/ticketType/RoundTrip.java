@@ -1,5 +1,6 @@
 package com.google.travel.pages.tripOption.ticketType;
 
+import com.google.travel.CommonTools;
 import com.google.travel.pages.BasePageObject;
 import com.google.travel.pages.tripOption.TripOption;
 import org.openqa.selenium.By;
@@ -7,7 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class RoundTrip extends BasePageObject implements TripOption {
 
@@ -28,15 +32,15 @@ public class RoundTrip extends BasePageObject implements TripOption {
         whereFrom.clear();
         actions.sendKeys(whereFrom,airportDataCode1).build().perform();
 
-        WebElement whereFromAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']")));
-        actions.moveToElement(whereFromAirportOption).click().build().perform();
+        WebElement whereFromDropDownOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']")));
+        actions.moveToElement(whereFromDropDownOption).click().build().perform();
 
         WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereTo));
         whereTo.clear();
         actions.sendKeys(whereTo,airportDataCode2).build().perform();
 
-        WebElement whereToAirportOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
-        actions.moveToElement(whereToAirportOption).click().build().perform();
+        WebElement whereToDropDownOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
+        actions.moveToElement(whereToDropDownOption).click().build().perform();
     }
 
 }

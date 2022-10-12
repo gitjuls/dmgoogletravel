@@ -1,6 +1,7 @@
 package com.google.travel.pages.sortBy;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+import com.google.travel.CommonTools;
 import com.google.travel.pages.BasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,7 +25,7 @@ public class SortBy extends BasePageObject {
     }
 
     public void clickSortByButton(){
-        Optional<WebElement> el = waitForPresenceOfElementLocated(this.popUpMenu);
+        Optional<WebElement> el = CommonTools.waitForPresenceOfElementLocated(this.popUpMenu, driver);
         if(el.isPresent()){
             el.get().click();
         }
@@ -39,11 +40,4 @@ public class SortBy extends BasePageObject {
         Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
     }
 
-    protected Optional<WebElement> waitForPresenceOfElementLocated(By byLocator) {
-        try {
-            return Optional.ofNullable((new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.presenceOfElementLocated(byLocator))));
-        } catch (TimeoutException e) {
-            return Optional.empty();
-        }
-    }
 }
