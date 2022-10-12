@@ -39,8 +39,5 @@ public class MultiCity extends BasePageObject implements TripOption {
             WebElement dropDownList = wait.until(ExpectedConditions.presenceOfElementLocated(this.dropDownList));
             actions.moveToElement(dropDownList).click().build().perform();
         }
-
     }
-
-
 }
