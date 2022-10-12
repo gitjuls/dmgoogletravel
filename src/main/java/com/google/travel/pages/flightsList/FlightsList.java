@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -54,20 +56,9 @@ public class FlightsList extends BasePageObject {
                 .mapToDouble(price -> Double.parseDouble(price))
                 .min();
 
-        String minPrice = null;
-        if(minPriceDouble.isPresent()){
-            /** Some number after converting String to Double loose the last sign **/
-            /** 1.06 insted of 1.060**/
-            if(String.valueOf(minPriceDouble.getAsDouble()).length() == 4){
-                minPrice = String.valueOf(minPriceDouble.getAsDouble()).concat("0");
-            }else{
-                minPrice= String.valueOf(minPriceDouble.getAsDouble());}
-        }
-        if(minPriceInt.isPresent()){
-            minPrice = String.valueOf(minPriceInt.getAsInt());
-        }
+        DecimalFormat df = new DecimalFormat("#.000");
 
-        return minPrice;
+        return minPriceInt.isPresent() ? minPriceInt.getAsInt()+"" : df.format(minPriceDouble.getAsDouble());
     }
 
     public String getTheMinDurationTime(){

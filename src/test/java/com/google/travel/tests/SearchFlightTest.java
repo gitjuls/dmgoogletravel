@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -101,4 +102,5 @@ public class SearchFlightTest extends TestBase {
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
     }
+
 }
