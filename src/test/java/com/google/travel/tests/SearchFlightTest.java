@@ -61,7 +61,6 @@ public class SearchFlightTest extends TestBase {
         searchResult = searchFlight.clickSearchButton();
         String ExpectedResult = searchResult.searchResult();
         Assert.assertFalse(ExpectedResult.equalsIgnoreCase("No results"));
-      //  Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
     }
 
     @Test(dataProvider = "getData2")
