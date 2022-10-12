@@ -112,8 +112,6 @@ public class FlightsList extends BasePageObject {
         long m = TimeUnit.MILLISECONDS.toMinutes(tmilli) % 60;
 
         return new String(h+":"+m);
-       // return new SimpleDateFormat("HH:mm").format( new Date(minDurationTimeInMilliSeconds.get()));
-
     }
 
     public String getTheFirstDurationTimeFromTheList(){
