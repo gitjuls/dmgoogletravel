@@ -1,8 +1,7 @@
 package com.google.travel.pages;
 
-import com.google.travel.pages.flightsList.FlightsList;
+import com.google.travel.pages.flightsList.SortByResult;
 import com.google.travel.pages.sortBy.SortBy;
-import com.google.travel.pages.tripOption.ticketType.TicketType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,14 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class SearchResult extends BasePageObject {
 
     private SortBy sortBy;
-    private FlightsList flightsList;
+    private SortByResult flightsList;
 
     By searchResult = By.xpath("//*[@role='main']//*[@role='alert']");
 
     public SearchResult(WebDriver driver) {
         super(driver);
         this.sortBy = new SortBy(driver);
-        this.flightsList = new FlightsList(driver);
+        this.flightsList = new SortByResult(driver);
     }
 
     public String searchResult(){

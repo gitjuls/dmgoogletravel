@@ -12,7 +12,7 @@ public abstract class BasePageObject {
 
     public BasePageObject(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
 }

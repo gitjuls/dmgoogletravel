@@ -12,12 +12,12 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class FlightsList extends BasePageObject {
+public class SortByResult extends BasePageObject {
 
     By flightPrice = By.xpath("//ul/li//span[contains(text(),'$')]");
     By flightDuration = By.xpath("//ul/li//div[contains(@aria-label, 'Total duration')]");
 
-    public FlightsList(WebDriver driver) {
+    public SortByResult(WebDriver driver) {
         super(driver);
     }
 
