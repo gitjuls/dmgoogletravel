@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class FlightsList extends BasePageObject {
@@ -48,12 +49,25 @@ public class FlightsList extends BasePageObject {
 
         /** price equal 1,000 and more **/
         OptionalDouble minPriceDouble = priceList.stream()
-                .filter(price -> price.length() >= 4)
-                .map(price -> price.replace(",","."))
-                .mapToDouble(price -> Double.valueOf(price))
+                .filter(price -> price.length() >= 5)
+                .map(el -> el.replace(",","."))
+                .mapToDouble(price -> Double.parseDouble(price))
                 .min();
 
-        return minPriceInt.isPresent()? minPriceInt.getAsInt()+"" : minPriceDouble.getAsDouble()+"";
+        String minPrice = null;
+        if(minPriceDouble.isPresent()){
+            /** Some number after converting String to Double loose the last sign **/
+            /** 1.06 insted of 1.060**/
+            if(String.valueOf(minPriceDouble.getAsDouble()).length() == 4){
+                minPrice = String.valueOf(minPriceDouble.getAsDouble()).concat("0");
+            }else{
+                minPrice= String.valueOf(minPriceDouble.getAsDouble());}
+        }
+        if(minPriceInt.isPresent()){
+            minPrice = String.valueOf(minPriceInt.getAsInt());
+        }
+
+        return minPrice;
     }
 
     public String getTheMinDurationTime(){
@@ -62,14 +76,14 @@ public class FlightsList extends BasePageObject {
         List<String> listOfDurationContainsHoursAndMinutes = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> el.getText().contains("min"))
-               // .limit(5)
+                .limit(5)
                 .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
                 .collect(Collectors.toList());
 
         List<String> listOfDurationContainsOnlyHours = totalDurationList.stream()
                 .filter(el -> el.getText().contains("hr"))
                 .filter(el -> !el.getText().contains("min"))
-                //.limit(5)
+                .limit(5)
                 .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
                 .collect(Collectors.toList());
 
@@ -77,19 +91,29 @@ public class FlightsList extends BasePageObject {
         listOfDurationTime.add(listOfDurationContainsHoursAndMinutes);
         listOfDurationTime.add(listOfDurationContainsOnlyHours);
 
-        OptionalLong minDurationTimeInMilliSeconds = listOfDurationTime.stream()
+        Optional<Long> minDurationTimeInMilliSeconds = listOfDurationTime.stream()
                 .flatMap(l->l.stream())
                 .map(el -> {
                     SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                    format.setTimeZone(TimeZone.getTimeZone("UTC"));
                     Date date = new Date();
-                    try {date = format.parse(el);}
+                    try {
+                        date = format.parse(el);
+                    }
                     catch (ParseException e) {e.printStackTrace();}
-                    return date.getTime(); // get time in milliSeconds;
+                    return date;
                 })
-                .mapToLong(time -> time)
-                .min();
+                .map(time -> time.getTime()) // get time in milliSeconds;
+                .sorted()
+                .findFirst();
 
-        return new SimpleDateFormat("HH:mm").format( new Date(minDurationTimeInMilliSeconds.getAsLong())).toString();
+        long tmilli = minDurationTimeInMilliSeconds.get();
+        long h = TimeUnit.MILLISECONDS.toHours(tmilli);
+        long m = TimeUnit.MILLISECONDS.toMinutes(tmilli) % 60;
+
+        return new String(h+":"+m);
+       // return new SimpleDateFormat("HH:mm").format( new Date(minDurationTimeInMilliSeconds.get()));
+
     }
 
     public String getTheFirstDurationTimeFromTheList(){

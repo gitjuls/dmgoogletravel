@@ -6,6 +6,11 @@ import com.google.travel.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -20,14 +25,14 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(oneWayData, "DCA", "TPA");
 
         List<String> roundTripData = new ArrayList<>();
-        Collections.addAll(roundTripData, "DCA", "IXZ");
+        Collections.addAll(roundTripData, "DCA", "TLV");
 
         List<String> multiCityData = new ArrayList<>();
         Collections.addAll(multiCityData, "DCA", "LAX", "LAX", "TPA", "TPA", "DCA");
 
         return new Object[][]{
                 {"One way", oneWayData},
-                {"Round trip", roundTripData},
+                {"Round trip", roundTripData}
              //   {"Multi-city", multiCityData}
         };
     }
@@ -96,5 +101,4 @@ public class SearchFlightTest extends TestBase {
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
     }
-
 }
