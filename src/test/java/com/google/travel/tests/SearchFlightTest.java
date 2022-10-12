@@ -1,19 +1,11 @@
 package com.google.travel.tests;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.TestBase;
 import com.google.travel.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class SearchFlightTest extends TestBase {
 
