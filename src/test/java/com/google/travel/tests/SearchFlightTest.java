@@ -2,9 +2,11 @@ package com.google.travel.tests;
 
 import com.google.travel.TestBase;
 import com.google.travel.pages.*;
+import com.google.travel.data.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.*;
 
 public class SearchFlightTest extends TestBase {
@@ -36,7 +38,7 @@ public class SearchFlightTest extends TestBase {
         Collections.addAll(roundTripDataAlternativeSuggestionsFound, "DCA", "ISL");
 
         List<String> roundTripDataNoResults = new ArrayList<>();
-        Collections.addAll(roundTripDataNoResults, "DCA", "KBP");
+        Collections.addAll(roundTripDataNoResults, "DCA", "AAA");
 
         return new Object[][]{
                 {"Round trip", roundTripDataAlternativeSuggestionsFound, "No results returned, alternative suggestions found."},
@@ -92,6 +94,10 @@ public class SearchFlightTest extends TestBase {
         String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
+    }
+
+    @Test
+    public void test(){
     }
 
 }

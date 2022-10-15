@@ -1,0 +1,42 @@
+{
+  "data": {
+    "tripOption": {
+      "oneWay": [
+        {
+          "value": "DCA"
+        },
+        {
+          "value": "TPA"
+        }
+      ],
+      "roundTrip": [
+        {
+          "value": "DCA"
+        },
+        {
+          "value": "TLV"
+        }
+      ],
+      "multiCity": [
+        {
+          "value": "DCA"
+        },
+        {
+          "value": "TPA"
+        },
+        {
+          "value": "TPA"
+        },
+        {
+          "value": "JFK"
+        },
+        {
+          "value": "JFK"
+        },
+        {
+          "value": "DCA"
+        }
+      ]
+    }
+  }
+}
