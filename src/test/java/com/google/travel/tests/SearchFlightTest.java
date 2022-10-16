@@ -6,7 +6,6 @@ import com.google.travel.data.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.*;
 
 public class SearchFlightTest extends TestBase {
@@ -15,38 +14,23 @@ public class SearchFlightTest extends TestBase {
     private SearchResult searchResult;
 
     @DataProvider
-    public Object[][] getData(){
-        List<String> oneWayData = new ArrayList<>();
-        Collections.addAll(oneWayData, "DCA", "TPA");
-
-        List<String> roundTripData = new ArrayList<>();
-        Collections.addAll(roundTripData, "DCA", "TLV");
-
-        List<String> multiCityData = new ArrayList<>();
-        Collections.addAll(multiCityData, "DCA", "TPA", "TPA", "JFK", "JFK", "DCA");
-
+    public Object[][] getPositiveTestData(){
         return new Object[][]{
-                {"One way", oneWayData},
-                {"Round trip", roundTripData},
-                {"Multi-city", multiCityData}
+                {"One way", TestData.getTripData("oneWay")},
+                {"Round trip", TestData.getTripData("roundTrip")},
+                {"Multi-city", TestData.getTripData("multiCity")}
         };
     }
 
     @DataProvider
-    public Object[][] getData2(){
-        List<String> roundTripDataAlternativeSuggestionsFound = new ArrayList<>();
-        Collections.addAll(roundTripDataAlternativeSuggestionsFound, "DCA", "ISL");
-
-        List<String> roundTripDataNoResults = new ArrayList<>();
-        Collections.addAll(roundTripDataNoResults, "DCA", "AAA");
-
+    public Object[][] getNegativeTestData(){
         return new Object[][]{
-                {"Round trip", roundTripDataAlternativeSuggestionsFound, "No results returned, alternative suggestions found."},
-                {"Round trip", roundTripDataNoResults, "No results returned."}
+                {"Round trip", TestData.getTripData("rtAltSug"), TestData.getSearchResultMessage("altSugMessage")},
+                {"Round trip", TestData.getTripData("rtNoRes"), TestData.getSearchResultMessage("noResMessage")}
         };
     }
 
-    @Test(dataProvider = "getData")
+    @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSearchResultsReturned(String ticketType, List<String> searchByCode) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -54,10 +38,10 @@ public class SearchFlightTest extends TestBase {
         searchFlight.inputSearchData(searchByCode);
         searchResult = searchFlight.clickSearchButton();
         String ExpectedResult = searchResult.searchResult();
-        Assert.assertFalse(ExpectedResult.equalsIgnoreCase("No results"));
+        Assert.assertFalse(ExpectedResult.contains("No results"));
     }
 
-    @Test(dataProvider = "getData2")
+    @Test(dataProvider = "getNegativeTestData")
     public void verifyIfSearchResultsReturnedNoResultsOrAlternativeSuggestions(String ticketType, List<String> searchByCode, String expectedAlert) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -68,7 +52,7 @@ public class SearchFlightTest extends TestBase {
         Assert.assertTrue(ExpectedResult.equalsIgnoreCase(expectedAlert));
     }
 
-    @Test(dataProvider = "getData")
+    @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSortedByMinPriceIsMatch(String ticketType, List<String> searchByCode) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -82,7 +66,7 @@ public class SearchFlightTest extends TestBase {
         Assert.assertEquals(firstPriceFromTheSortedList, minPriceFromTheList);
     }
 
-    @Test(dataProvider = "getData")
+    @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
         searchFlight = new SearchFlight(driver);
         searchFlight.navigate();
@@ -94,10 +78,6 @@ public class SearchFlightTest extends TestBase {
         String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
-    }
-
-    @Test
-    public void test(){
     }
 
 }

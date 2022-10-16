@@ -1,42 +1,23 @@
 {
   "data": {
-    "tripOption": {
-      "oneWay": [
-        {
-          "value": "DCA"
+      "oneWay": {
+          "tripPath": "DCA => TPA"
         },
-        {
-          "value": "TPA"
+      "roundTrip": {
+          "tripPath": "DCA => IST",
+          "negativeData": [
+            {
+              "tripPath": "DCA => ISL",
+              "message": "No results returned, alternative suggestions found."
+            },
+            {
+              "tripPath": "DCA => AAA",
+              "message": "No results returned."
+            }
+          ]
+        },
+      "multiCity": {
+          "tripPath": "DCA => TPA => TPA => JFK => JFK => DCA"
         }
-      ],
-      "roundTrip": [
-        {
-          "value": "DCA"
-        },
-        {
-          "value": "TLV"
-        }
-      ],
-      "multiCity": [
-        {
-          "value": "DCA"
-        },
-        {
-          "value": "TPA"
-        },
-        {
-          "value": "TPA"
-        },
-        {
-          "value": "JFK"
-        },
-        {
-          "value": "JFK"
-        },
-        {
-          "value": "DCA"
-        }
-      ]
     }
-  }
 }

@@ -32,7 +32,7 @@ public class MultiCity extends BasePageObject implements TripOption {
                 addFlight.click();
             }
         }
-        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(inputFields, 2));
+        List<WebElement> listOfInputFields = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(inputFields, 1));
         for (int i = 0; i < searchData.size(); i++) {
             listOfInputFields.get(i).clear();
             actions.sendKeys(listOfInputFields.get(i), searchData.get(i)).build().perform();
