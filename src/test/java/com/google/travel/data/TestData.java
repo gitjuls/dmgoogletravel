@@ -2,7 +2,6 @@ package com.google.travel.data;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.json.config.JsonPathConfig;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

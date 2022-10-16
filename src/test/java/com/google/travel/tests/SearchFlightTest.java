@@ -32,7 +32,7 @@ public class SearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSearchResultsReturned(String ticketType, List<String> searchByCode) {
-        searchFlight = new SearchFlight(driver);
+        searchFlight = new SearchFlight(driver, log);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
@@ -43,7 +43,7 @@ public class SearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getNegativeTestData")
     public void verifyIfSearchResultsReturnedNoResultsOrAlternativeSuggestions(String ticketType, List<String> searchByCode, String expectedAlert) {
-        searchFlight = new SearchFlight(driver);
+        searchFlight = new SearchFlight(driver, log);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
@@ -54,7 +54,7 @@ public class SearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSortedByMinPriceIsMatch(String ticketType, List<String> searchByCode) {
-        searchFlight = new SearchFlight(driver);
+        searchFlight = new SearchFlight(driver, log);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
@@ -68,7 +68,8 @@ public class SearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
-        searchFlight = new SearchFlight(driver);
+        log.info("Start test");
+        searchFlight = new SearchFlight(driver, log);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
@@ -78,6 +79,7 @@ public class SearchFlightTest extends TestBase {
         String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
+        log.info("Finish test");
     }
 
 }
