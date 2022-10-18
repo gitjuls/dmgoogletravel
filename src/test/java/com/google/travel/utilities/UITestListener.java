@@ -25,12 +25,12 @@ public class UITestListener extends TestLogger implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result){
-        log.info("TEST " + result.getMethod().getMethodName() + " SKIPPED");
+        log.debug("TEST " + result.getMethod().getMethodName() + " SKIPPED");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info("TEST " + result.getMethod().getMethodName() + " FAIL");
+        log.debug("TEST " + result.getMethod().getMethodName() + " FAIL");
 
         this.driver = (WebDriver) result.getTestContext().getAttribute("driver");
         TakesScreenshot screenshot = ((TakesScreenshot) driver);
