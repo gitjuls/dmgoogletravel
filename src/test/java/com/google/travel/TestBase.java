@@ -1,33 +1,29 @@
 package com.google.travel;
 
 import com.google.travel.driver.DriverFactory;
+import com.google.travel.utilities.TestLogger;
+import com.google.travel.utilities.UITestListener;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-import org.apache.log4j.*;
+import org.testng.annotations.*;
 
-public class TestBase {
+@Listeners(UITestListener.class)
+public class TestBase extends TestLogger {
     public WebDriver driver;
     public Logger log;
 
-    @BeforeTest
     @Parameters("browser")
+    @BeforeTest
     public void setDriver(@Optional("chrome") String browser, ITestContext context){
-        driver = DriverFactory.getDriver(browser);
-        driver.manage().window().maximize();
+       this.driver = DriverFactory.getDriver(browser);
+       this.driver.manage().window().maximize();
+       context.setAttribute("driver", driver);
+    }
 
-      //  log = LogManager.getLogger(this.getClass().getName());
-        String testName = context.getCurrentXmlTest().getName();
-        log = LogManager.getLogger(testName);
-        BasicConfigurator.configure();
-        FileAppender fileAppender = new FileAppender();
-        fileAppender.setFile("logfile.txt");
-        fileAppender.setLayout(new PatternLayout("[%t] %d{HH:mm:ss,SSS} %-5p [%c{1}] %m%n"));
-        log.addAppender(fileAppender);
-        fileAppender.activateOptions();
+    @BeforeTest
+    public void getLogger(ITestContext context){
+        this.log = TestLogger.setLogger(context);
     }
 
     @AfterTest

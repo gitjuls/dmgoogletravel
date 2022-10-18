@@ -68,7 +68,6 @@ public class SearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getPositiveTestData")
     public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
-        log.info("Start test");
         searchFlight = new SearchFlight(driver, log);
         searchFlight.navigate();
         searchFlight.selectTicketType(ticketType);
@@ -79,7 +78,6 @@ public class SearchFlightTest extends TestBase {
         String firstDurationTimeFromTheSortedList = searchResult.getTheFirstDurationTimeFromTheList();
         String minDurationTimeFromTheList = searchResult.getTheMinDurationTime();
         Assert.assertEquals(firstDurationTimeFromTheSortedList, minDurationTimeFromTheList);
-        log.info("Finish test");
     }
 
 }
