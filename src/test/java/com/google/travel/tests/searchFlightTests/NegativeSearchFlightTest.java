@@ -1,6 +1,6 @@
 package com.google.travel.tests.searchFlightTests;
 
-import com.google.travel.data.TestData;
+import com.google.travel.data.GetTestData;
 import com.google.travel.pages.SearchFlight;
 import com.google.travel.pages.SearchResult;
 import com.google.travel.tests.TestBase;
@@ -17,8 +17,8 @@ public class NegativeSearchFlightTest extends TestBase {
     @DataProvider
     public Object[][] getData(){
         return new Object[][]{
-                {"Round trip", TestData.getTripData("rtAltSug"), TestData.getSearchResultMessage("altSugMessage")},
-                {"Round trip", TestData.getTripData("rtNoRes"), TestData.getSearchResultMessage("noResMessage")}
+                {"Round trip", GetTestData.getTripData("rtAltSug"), GetTestData.getSearchResultMessage("altSugMessage")},
+                {"Round trip", GetTestData.getTripData("rtNoRes"), GetTestData.getSearchResultMessage("noResMessage")}
         };
     }
 

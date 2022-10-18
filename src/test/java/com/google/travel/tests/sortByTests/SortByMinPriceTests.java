@@ -1,6 +1,6 @@
 package com.google.travel.tests.sortByTests;
 
-import com.google.travel.data.TestData;
+import com.google.travel.data.GetTestData;
 import com.google.travel.pages.SearchFlight;
 import com.google.travel.pages.SearchResult;
 import com.google.travel.tests.TestBase;
@@ -18,9 +18,9 @@ public class SortByMinPriceTests extends TestBase {
     @DataProvider
     public Object[][] getData(){
         return new Object[][]{
-                {"One way", TestData.getTripData("oneWay")},
-                {"Round trip", TestData.getTripData("roundTrip")},
-                {"Multi-city", TestData.getTripData("multiCity")}
+                {"One way", GetTestData.getTripData("oneWay")},
+                {"Round trip", GetTestData.getTripData("roundTrip")},
+                {"Multi-city", GetTestData.getTripData("multiCity")}
         };
     }
 

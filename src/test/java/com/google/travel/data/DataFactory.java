@@ -4,7 +4,7 @@ import io.restassured.path.json.JsonPath;
 import java.util.HashMap;
 import java.util.function.Function;
 
-public class JsonPathFactory {
+public class DataFactory {
 
     private static final Function<JsonPath, String> oneWay = jsonPath -> jsonPath.get("data.oneWay.tripPath");
     private static final Function<JsonPath, String> roundTrip = jsonPath -> jsonPath.get("data.roundTrip.tripPath");

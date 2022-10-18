@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestData {
+public class GetTestData {
     private static JsonPath jsonPath;
 
     private static void setFileToRead(){
         File file = new File(
-                TestData.class.getClassLoader().getResource("testData.json").getFile()
+                GetTestData.class.getClassLoader().getResource("testData.json").getFile()
         );
 
         byte[] bytes = readAllBytes(file);
@@ -43,14 +43,14 @@ public class TestData {
 
     public static List<String> getTripData(String tripType){
         setFileToRead();
-        String tripPath = JsonPathFactory.getData(tripType, jsonPath);
+        String tripPath = DataFactory.getData(tripType, jsonPath);
         List<String> list = splitPath(tripPath);
         return list;
     }
 
     public static String getSearchResultMessage(String tripType){
         setFileToRead();
-        String message = JsonPathFactory.getData(tripType, jsonPath);
+        String message = DataFactory.getData(tripType, jsonPath);
         return message;
     }
 
