@@ -31,7 +31,7 @@ public class SortBy extends BasePageObject {
 
     public void sortByMenuItem(String menuItem){
         List<WebElement> sortByMenuItem = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.sortByMenuItems, 2));
-        Predicate<WebElement> predicate = SortByCriteriaFactory.selectMenuItem(menuItem);
+        Predicate<WebElement> predicate = SortByOptionFactory.selectMenuItem(menuItem);
         sortByMenuItem.stream().filter(predicate).findFirst().get().click();
         /** wait 1 second while page is updating **/
         Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);

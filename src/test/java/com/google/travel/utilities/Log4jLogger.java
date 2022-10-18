@@ -8,7 +8,7 @@ import org.testng.ITestContext;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
-public class TestLogger {
+public class Log4jLogger {
 
     public static org.apache.log4j.Logger log;
 

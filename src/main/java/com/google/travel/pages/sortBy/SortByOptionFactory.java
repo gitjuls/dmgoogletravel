@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class SortByCriteriaFactory {
+public class SortByOptionFactory {
 
     private static Predicate<WebElement> bestFlights = element -> element.getAttribute("data-value").equalsIgnoreCase("1");
     private static Predicate<WebElement> price = element -> element.getAttribute("data-value").equalsIgnoreCase("2");

@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-public class UITestListener extends TestLogger implements ITestListener {
+public class UITestListener extends Log4jLogger implements ITestListener {
     public WebDriver driver;
 
     @Override

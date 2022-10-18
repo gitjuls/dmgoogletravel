@@ -1,7 +1,7 @@
 package com.google.travel.tests;
 
 import com.google.travel.driver.DriverFactory;
-import com.google.travel.utilities.TestLogger;
+import com.google.travel.utilities.Log4jLogger;
 import com.google.travel.utilities.UITestListener;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,8 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 @Listeners(UITestListener.class)
-public class TestBase extends TestLogger {
+public class TestBase extends Log4jLogger {
+
     public WebDriver driver;
     public Logger log;
 
@@ -23,7 +24,7 @@ public class TestBase extends TestLogger {
 
     @BeforeTest
     public void getLogger(ITestContext context){
-        this.log = TestLogger.setLogger(context);
+        this.log = Log4jLogger.setLogger(context);
     }
 
     @AfterTest

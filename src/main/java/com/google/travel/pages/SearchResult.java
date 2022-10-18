@@ -1,6 +1,7 @@
 package com.google.travel.pages;
 
-import com.google.travel.pages.flightsList.SortByResult;
+import com.google.travel.pages.searchFlightListResults.FlightDuration;
+import com.google.travel.pages.searchFlightListResults.FlightPrice;
 import com.google.travel.pages.sortBy.SortBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,8 @@ import org.apache.log4j.*;
 public class SearchResult extends BasePageObject {
 
     private SortBy sortBy;
-    private SortByResult flightsList;
+    private FlightPrice flightPrice;
+    private FlightDuration flightDuration;
     protected Logger log;
 
     By searchResult = By.xpath("//*[@role='main']//*[@role='alert']");
@@ -20,7 +22,8 @@ public class SearchResult extends BasePageObject {
         super(driver);
         this.log = log;
         this.sortBy = new SortBy(driver);
-        this.flightsList = new SortByResult(driver);
+        this.flightPrice = new FlightPrice(driver);
+        this.flightDuration = new FlightDuration(driver);
     }
 
     public String searchResult(){
@@ -37,9 +40,9 @@ public class SearchResult extends BasePageObject {
         sortBy.sortByMenuItem(menuItem);
         log.info(this.getClass().getName() + ": SortBy " + menuItem);
     }
-    public String getTheFirstFlightPriceFromTheList(){ return flightsList.getTheFirstFlightPriceFromTheList();}
-    public String getTheMinFlightPrice(){ return flightsList.getTheMinFlightPrice();}
-    public String getTheMinDurationTime(){ return flightsList.getTheMinDurationTime();}
-    public String getTheFirstDurationTimeFromTheList(){ return flightsList.getTheFirstDurationTimeFromTheList();}
+    public String getTheFirstFlightPriceFromTheList(){ return flightPrice.getTheFirstFlightPriceFromTheList();}
+    public String getTheMinFlightPrice(){ return flightPrice.getTheMinFlightPrice();}
+    public String getTheMinDurationTime(){ return flightDuration.getTheMinDurationTime();}
+    public String getTheFirstDurationTimeFromTheList(){ return flightDuration.getTheFirstDurationTimeFromTheList();}
 
 }
