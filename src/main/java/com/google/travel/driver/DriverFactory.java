@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -17,12 +18,16 @@ public class DriverFactory {
     private static final Supplier<WebDriver> chromeSupplier = () -> {
         ChromeOptions chromeOptions = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
+        chromeOptions.setHeadless(true);
         return new ChromeDriver(chromeOptions);
     };
 
     private static final Supplier<WebDriver> firefoxSupplier = () ->{
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         WebDriverManager.firefoxdriver().setup();
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
+        firefoxOptions.setBinary(firefoxBinary);
         return new FirefoxDriver(firefoxOptions);
     };
 
