@@ -18,7 +18,7 @@ public class DriverFactory {
     private static final Supplier<WebDriver> chromeSupplier = () -> {
         ChromeOptions chromeOptions = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
-        chromeOptions.setHeadless(true);
+        chromeOptions.setHeadless(false);
         return new ChromeDriver(chromeOptions);
     };
 

@@ -5,6 +5,8 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.PatternLayout;
 import org.testng.ITestContext;
+
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
@@ -28,8 +30,8 @@ public class Log4jLogger {
 
     private static String buildFilePath(ITestContext context){
         String userDir = System.getProperty("user.dir");
-        String folder = "/logResult";
-        String fileName = "/log " + new Timestamp(System.currentTimeMillis()) + ".txt";
+        String folder = File.separator + "logResult";
+        String fileName = File.separator + "log " + new Timestamp(System.currentTimeMillis()) + ".txt";
         String fileNameNoColon = fileName.replaceAll(":" , "-");
         return new StringBuilder()
                 .append(userDir)

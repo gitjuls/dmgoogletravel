@@ -45,10 +45,10 @@ public class UITestListener extends Log4jLogger implements ITestListener {
 
     private String buildFilePath(ITestResult testResult){
         String userDir = System.getProperty("user.dir");
-        String folder = "/screenshots";
-        String className = "/" + testResult.getTestClass().getName().replace("." , "/");
-        String testMethodName = "/" + testResult.getMethod().getMethodName();
-        String fileName = "/image_" + testResult.getMethod().getMethodName() + "_" + new Timestamp(System.currentTimeMillis()) + ".jpg";
+        String folder = File.separator + "screenshots";
+        String className = File.separator + testResult.getTestClass().getName().replace("." , "/");
+        String testMethodName = File.separator + testResult.getMethod().getMethodName();
+        String fileName = File.separator + "image_" + testResult.getMethod().getMethodName() + "_" + new Timestamp(System.currentTimeMillis()) + ".jpg";
         String fileNameNoColon = fileName.replaceAll(":" , "-");
         return new StringBuilder()
                 .append(userDir)
