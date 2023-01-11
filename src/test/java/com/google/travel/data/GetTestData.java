@@ -1,5 +1,6 @@
 package com.google.travel.data;
 
+import com.google.travel.factory.TicketTypeDataFactory;
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.json.config.JsonPathConfig;
 import java.io.File;
@@ -43,14 +44,14 @@ public class GetTestData {
 
     public static List<String> getTripData(String tripType){
         setFileToRead();
-        String tripPath = DataFactory.getData(tripType, jsonPath);
+        String tripPath = TicketTypeDataFactory.getData(tripType, jsonPath);
         List<String> list = splitPath(tripPath);
         return list;
     }
 
     public static String getSearchResultMessage(String tripType){
         setFileToRead();
-        String message = DataFactory.getData(tripType, jsonPath);
+        String message = TicketTypeDataFactory.getData(tripType, jsonPath);
         return message;
     }
 

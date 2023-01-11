@@ -1,10 +1,10 @@
-package com.google.travel.data;
+package com.google.travel.factory;
 
 import io.restassured.path.json.JsonPath;
 import java.util.HashMap;
 import java.util.function.Function;
 
-public class DataFactory {
+public class TicketTypeDataFactory {
 
     private static final Function<JsonPath, String> oneWay = jsonPath -> jsonPath.get("data.oneWay.tripPath");
     private static final Function<JsonPath, String> roundTrip = jsonPath -> jsonPath.get("data.roundTrip.tripPath");
