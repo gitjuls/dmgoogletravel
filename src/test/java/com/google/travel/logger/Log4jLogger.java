@@ -1,4 +1,4 @@
-package com.google.travel.utilities;
+package com.google.travel.logger;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.FileAppender;

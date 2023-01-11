@@ -1,5 +1,6 @@
-package com.google.travel.utilities;
+package com.google.travel.listeners;
 
+import com.google.travel.logger.Log4jLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
