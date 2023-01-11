@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.apache.log4j.*;
 
-public class SearchResult extends BasePageObject {
+public class SearchResult extends BasePage {
 
     private SortBy sortBy;
     private FlightPrice flightPrice;

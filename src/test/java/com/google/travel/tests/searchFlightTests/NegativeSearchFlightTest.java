@@ -1,7 +1,8 @@
 package com.google.travel.tests.searchFlightTests;
 
+import com.google.travel.constants.EndPoint;
 import com.google.travel.data.GetTestData;
-import com.google.travel.pages.SearchFlight;
+import com.google.travel.pages.Flights;
 import com.google.travel.pages.SearchResult;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class NegativeSearchFlightTest extends TestBase {
 
-    private SearchFlight searchFlight;
+    private Flights searchFlight;
     private SearchResult searchResult;
 
     @DataProvider
@@ -24,8 +25,8 @@ public class NegativeSearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getData")
     public void verifyIfSearchResultsReturnedNoResultsOrAlternativeSuggestions(String ticketType, List<String> searchByCode, String expectedAlert) {
-        searchFlight = new SearchFlight(driver, log);
-        searchFlight.navigate();
+        searchFlight = new Flights(driver, log);
+        searchFlight.navigate(EndPoint.FLIGHTS.endPoint);
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);
         searchResult = searchFlight.clickSearchButton();

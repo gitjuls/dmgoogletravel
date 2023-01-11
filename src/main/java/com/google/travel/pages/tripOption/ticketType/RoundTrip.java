@@ -1,6 +1,6 @@
 package com.google.travel.pages.tripOption.ticketType;
 
-import com.google.travel.pages.BasePageObject;
+import com.google.travel.pages.BasePage;
 import com.google.travel.pages.tripOption.TripOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
-public class RoundTrip extends BasePageObject implements TripOption {
+public class RoundTrip extends BasePage implements TripOption {
 
     By whereFrom = By.xpath("//*[@jsname='snKmsc']//*[@jsname='FDWhSe']//input[@value][@aria-labelledby]");
     By whereTo = By.xpath("//*[@jsname='iOyk4d']//*[@placeholder='Where to?']");

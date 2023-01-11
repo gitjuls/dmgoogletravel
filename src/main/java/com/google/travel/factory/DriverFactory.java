@@ -1,4 +1,4 @@
-package com.google.travel.driver;
+package com.google.travel.factory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

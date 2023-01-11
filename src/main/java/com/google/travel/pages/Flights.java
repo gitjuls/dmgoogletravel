@@ -2,6 +2,7 @@ package com.google.travel.pages;
 
 import com.google.travel.pages.tripOption.ticketType.TicketType;
 import com.google.travel.pages.tripOption.TripOption;
+import com.google.travel.utilities.ConfigLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.*;
 
-public class SearchFlight extends BasePageObject {
+public class Flights extends BasePage {
 
     By button = By.xpath("//button[@jsname='vLv7Lb']");
 
@@ -18,14 +19,14 @@ public class SearchFlight extends BasePageObject {
     private TicketType ticketType;
     protected Logger log;
 
-    public SearchFlight(WebDriver driver, Logger log) {
+    public Flights(WebDriver driver, Logger log) {
         super(driver);
         this.ticketType = new TicketType(driver);
         this.log = log;
     }
 
-    public void navigate(){
-        driver.get("https://www.google.com/travel/flights");
+    public void navigate(String endPoint){
+        driver.get(ConfigLoader.getInstance().getBaseUrl() + endPoint);
     }
 
     public void selectTicketType(String ticketType){

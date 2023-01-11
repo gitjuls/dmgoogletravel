@@ -1,6 +1,6 @@
 package com.google.travel.pages.tripOption.ticketType;
 
-import com.google.travel.pages.BasePageObject;
+import com.google.travel.pages.BasePage;
 import com.google.travel.pages.tripOption.TripOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
-public class MultiCity extends BasePageObject implements TripOption {
+public class MultiCity extends BasePage implements TripOption {
 
     By inputFields = By.xpath("//*[@jsname='MOPQS']//*[@jsname='pT3pqd']//input");
     By dropDownList = By.xpath("//div[@jsname='rymPhb']/ul/li[1]");

@@ -1,6 +1,6 @@
 package com.google.travel.pages.searchFlightListResults;
 
-import com.google.travel.pages.BasePageObject;
+import com.google.travel.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FlightPrice extends BasePageObject {
+public class FlightPrice extends BasePage {
 
     By flightPrice = By.xpath("//ul/li//span[contains(text(),'$')]");
 

@@ -1,6 +1,6 @@
 package com.google.travel.tests;
 
-import com.google.travel.driver.DriverFactory;
+import com.google.travel.factory.DriverFactory;
 import com.google.travel.utilities.Log4jLogger;
 import com.google.travel.utilities.UITestListener;
 import org.apache.log4j.Logger;

@@ -2,7 +2,7 @@ package com.google.travel.pages.sortBy;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.CommonTools;
-import com.google.travel.pages.BasePageObject;
+import com.google.travel.pages.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-public class SortBy extends BasePageObject {
+public class SortBy extends BasePage {
 
     By sortByButton = By.xpath("//button//span[contains(text(), 'Sort by:')]/..");
     By sortByMenuItems = By.xpath("//ul[@role='menu']/li");
