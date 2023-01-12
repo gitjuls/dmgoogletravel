@@ -1,4 +1,4 @@
-package com.google.travel.pages.sortBy;
+package com.google.travel.pages.fligths.searchResult.sortBy;
 
 import org.openqa.selenium.WebElement;
 

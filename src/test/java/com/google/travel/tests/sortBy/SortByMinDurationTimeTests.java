@@ -1,9 +1,9 @@
-package com.google.travel.tests.sortByTests;
+package com.google.travel.tests.sortBy;
 
 import com.google.travel.constants.EndPoint;
 import com.google.travel.data.GetTestData;
-import com.google.travel.pages.Flights;
-import com.google.travel.pages.SearchResult;
+import com.google.travel.pages.fligths.searchFligths.SearchFlights;
+import com.google.travel.pages.fligths.searchResult.SearchResult;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SortByMinDurationTimeTests extends TestBase {
 
-    private Flights searchFlight;
+    private SearchFlights searchFlight;
     private SearchResult searchResult;
 
     @DataProvider
@@ -27,7 +27,7 @@ public class SortByMinDurationTimeTests extends TestBase {
 
     @Test(dataProvider = "getData")
     public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
-        searchFlight = new Flights(driver, log);
+        searchFlight = new SearchFlights(driver, log);
         searchFlight.navigate(EndPoint.FLIGHTS.endPoint);
         searchFlight.selectTicketType(ticketType);
         searchFlight.inputSearchData(searchByCode);

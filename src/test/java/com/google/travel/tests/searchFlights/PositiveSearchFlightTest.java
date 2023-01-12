@@ -1,8 +1,9 @@
-package com.google.travel.tests.searchFlightTests;
+package com.google.travel.tests.searchFlights;
 
 import com.google.travel.constants.EndPoint;
-import com.google.travel.pages.*;
 import com.google.travel.data.*;
+import com.google.travel.pages.fligths.searchFligths.SearchFlights;
+import com.google.travel.pages.fligths.searchResult.SearchResult;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class PositiveSearchFlightTest extends TestBase {
 
-    private Flights flights;
+    private SearchFlights flights;
     private SearchResult searchResult;
 
     @DataProvider
@@ -25,7 +26,7 @@ public class PositiveSearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getData")
     public void verifyIfSearchResultsReturned(String ticketType, List<String> searchByCode) {
-        flights = new Flights(driver, log);
+        flights = new SearchFlights(driver, log);
         flights.navigate(EndPoint.FLIGHTS.endPoint);
         flights.selectTicketType(ticketType);
         flights.inputSearchData(searchByCode);

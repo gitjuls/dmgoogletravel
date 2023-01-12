@@ -1,4 +1,4 @@
-package com.google.travel.pages.searchFlightListResults;
+package com.google.travel.pages.fligths.searchResult.sortByOption;
 
 import com.google.travel.pages.BasePage;
 import org.openqa.selenium.By;
@@ -9,11 +9,11 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FlightPrice extends BasePage {
+public class Price extends BasePage {
 
     By flightPrice = By.xpath("//ul/li//span[contains(text(),'$')]");
 
-    public FlightPrice(WebDriver driver) {
+    public Price(WebDriver driver) {
         super(driver);
     }
 

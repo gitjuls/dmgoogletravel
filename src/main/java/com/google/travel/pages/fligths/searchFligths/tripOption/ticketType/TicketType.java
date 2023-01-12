@@ -1,8 +1,8 @@
-package com.google.travel.pages.tripOption.ticketType;
+package com.google.travel.pages.fligths.searchFligths.tripOption.ticketType;
 
 import com.google.travel.pages.BasePage;
-import com.google.travel.pages.tripOption.TripOption;
-import com.google.travel.pages.tripOption.TripOptionFactory;
+import com.google.travel.pages.fligths.searchFligths.tripOption.TripOption;
+import com.google.travel.pages.fligths.searchFligths.tripOption.TripOptionFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,4 +1,4 @@
-package com.google.travel.pages.sortBy;
+package com.google.travel.pages.fligths.searchResult.sortBy;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.travel.CommonTools;

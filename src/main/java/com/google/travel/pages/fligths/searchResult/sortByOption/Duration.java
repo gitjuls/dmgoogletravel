@@ -1,4 +1,4 @@
-package com.google.travel.pages.searchFlightListResults;
+package com.google.travel.pages.fligths.searchResult.sortByOption;
 
 import com.google.travel.pages.BasePage;
 import org.openqa.selenium.By;
@@ -11,11 +11,11 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class FlightDuration extends BasePage {
+public class Duration extends BasePage {
 
     By flightDuration = By.xpath("//ul/li//div[contains(@aria-label, 'Total duration')]");
 
-    public FlightDuration(WebDriver driver) {
+    public Duration(WebDriver driver) {
         super(driver);
     }
 

@@ -1,8 +1,9 @@
-package com.google.travel.pages;
+package com.google.travel.pages.fligths.searchResult;
 
-import com.google.travel.pages.searchFlightListResults.FlightDuration;
-import com.google.travel.pages.searchFlightListResults.FlightPrice;
-import com.google.travel.pages.sortBy.SortBy;
+import com.google.travel.pages.BasePage;
+import com.google.travel.pages.fligths.searchResult.sortByOption.Duration;
+import com.google.travel.pages.fligths.searchResult.sortByOption.Price;
+import com.google.travel.pages.fligths.searchResult.sortBy.SortBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,8 +13,8 @@ import org.apache.log4j.*;
 public class SearchResult extends BasePage {
 
     private SortBy sortBy;
-    private FlightPrice flightPrice;
-    private FlightDuration flightDuration;
+    private Price price;
+    private Duration duration;
     protected Logger log;
 
     By searchResult = By.xpath("//*[@role='main']//*[@role='alert']");
@@ -22,8 +23,8 @@ public class SearchResult extends BasePage {
         super(driver);
         this.log = log;
         this.sortBy = new SortBy(driver);
-        this.flightPrice = new FlightPrice(driver);
-        this.flightDuration = new FlightDuration(driver);
+        this.price = new Price(driver);
+        this.duration = new Duration(driver);
     }
 
     public String searchResult(){
@@ -40,9 +41,9 @@ public class SearchResult extends BasePage {
         sortBy.sortByMenuItem(menuItem);
         log.info(this.getClass().getName() + ": SortBy " + menuItem);
     }
-    public String getTheFirstFlightPriceFromTheList(){ return flightPrice.getTheFirstFlightPriceFromTheList();}
-    public String getTheMinFlightPrice(){ return flightPrice.getTheMinFlightPrice();}
-    public String getTheMinDurationTime(){ return flightDuration.getTheMinDurationTime();}
-    public String getTheFirstDurationTimeFromTheList(){ return flightDuration.getTheFirstDurationTimeFromTheList();}
+    public String getTheFirstFlightPriceFromTheList(){ return price.getTheFirstFlightPriceFromTheList();}
+    public String getTheMinFlightPrice(){ return price.getTheMinFlightPrice();}
+    public String getTheMinDurationTime(){ return duration.getTheMinDurationTime();}
+    public String getTheFirstDurationTimeFromTheList(){ return duration.getTheFirstDurationTimeFromTheList();}
 
 }
