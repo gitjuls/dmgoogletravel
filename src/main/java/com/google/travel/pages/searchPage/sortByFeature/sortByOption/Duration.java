@@ -1,17 +1,18 @@
-package com.google.travel.pages.fligths.searchResult.sortByOption;
+package com.google.travel.pages.searchPage.sortByFeature.sortByOption;
 
 import com.google.travel.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class Duration extends BasePage {
+public class Duration extends BasePage implements SortByInterface {
 
     By flightDuration = By.xpath("//ul/li//div[contains(@aria-label, 'Total duration')]");
 
@@ -19,7 +20,8 @@ public class Duration extends BasePage {
         super(driver);
     }
 
-    public String getTheFirstDurationTimeFromTheList(){
+    @Override
+    public String getFirstItem() {
         List<WebElement> durationWebElementsList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightDuration, 4));
 
         Optional<String> firstDurationTime_HHmm_Pattern =
@@ -31,7 +33,28 @@ public class Duration extends BasePage {
         return firstDurationTime_HHmm_Pattern.isPresent() ? firstDurationTime_HHmm_Pattern.get()+"" : firstDurationTime_HH_Pattern.get()+"";
     }
 
-    public String getTheMinDurationTime(){
+    private List<String> getDurationTimeWithHoursAndMinutesPattern(List<WebElement> durationList){
+        List<String> list = durationList.stream()
+                .filter(el -> el.getText().contains("hr"))
+                .filter(el -> el.getText().contains("min"))
+                .limit(5)
+                .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
+                .collect(Collectors.toList());
+        return list;
+    }
+
+    private List<String> getDurationTimeWithHoursOnlyPattern(List<WebElement> durationList){
+        List<String> list = durationList.stream()
+                .filter(el -> el.getText().contains("hr"))
+                .filter(el -> !el.getText().contains("min"))
+                .limit(5)
+                .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
+                .collect(Collectors.toList());
+        return list;
+    }
+
+    @Override
+    public String getMinItem() {
         List<WebElement> durationWebElementsList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(this.flightDuration, 4));
 
         List<String> durationList_HHmm_Pattern = getDurationTimeWithHoursAndMinutesPattern(durationWebElementsList);
@@ -62,25 +85,4 @@ public class Duration extends BasePage {
 
         return new String(h+":"+m);
     }
-
-    private List<String> getDurationTimeWithHoursAndMinutesPattern(List<WebElement> durationList){
-        List<String> list = durationList.stream()
-                .filter(el -> el.getText().contains("hr"))
-                .filter(el -> el.getText().contains("min"))
-                .limit(5)
-                .map(el -> el.getText().replace("hr", ":").replace(" ", "").replace("min", "").trim())
-                .collect(Collectors.toList());
-        return list;
-    }
-
-    private List<String> getDurationTimeWithHoursOnlyPattern(List<WebElement> durationList){
-        List<String> list = durationList.stream()
-                .filter(el -> el.getText().contains("hr"))
-                .filter(el -> !el.getText().contains("min"))
-                .limit(5)
-                .map(el -> el.getText().replace("hr", ":00").replace(" ", "").trim())
-                .collect(Collectors.toList());
-        return list;
-    }
-
 }

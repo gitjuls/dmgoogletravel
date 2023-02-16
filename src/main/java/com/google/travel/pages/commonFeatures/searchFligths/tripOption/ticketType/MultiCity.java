@@ -1,13 +1,15 @@
-package com.google.travel.pages.fligths.searchFligths.tripOption.ticketType;
+package com.google.travel.pages.commonFeatures.searchFligths.tripOption.ticketType;
 
 import com.google.travel.pages.BasePage;
-import com.google.travel.pages.fligths.searchFligths.tripOption.TripOption;
+import com.google.travel.pages.commonFeatures.searchFligths.tripOption.TripOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
+
 public class MultiCity extends BasePage implements TripOption {
 
     By inputFields = By.xpath("//*[@jsname='MOPQS']//*[@jsname='pT3pqd']//input");

@@ -1,7 +1,8 @@
-package com.google.travel.pages.fligths.searchFligths.tripOption.ticketType;
+package com.google.travel.pages.commonFeatures.searchFligths.tripOption.ticketType;
 
-import com.google.travel.pages.fligths.searchFligths.tripOption.TripOption;
+import com.google.travel.pages.commonFeatures.searchFligths.tripOption.TripOption;
 import org.openqa.selenium.WebDriver;
+
 import java.util.List;
 
 public class OneWay extends RoundTrip implements TripOption {

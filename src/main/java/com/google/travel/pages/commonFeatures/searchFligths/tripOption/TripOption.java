@@ -1,4 +1,4 @@
-package com.google.travel.pages.fligths.searchFligths.tripOption;
+package com.google.travel.pages.commonFeatures.searchFligths.tripOption;
 
 import java.util.List;
 

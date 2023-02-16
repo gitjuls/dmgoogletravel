@@ -1,9 +1,11 @@
-package com.google.travel.pages.fligths.searchFligths.tripOption;
+package com.google.travel.pages.commonFeatures.searchFligths.tripOption;
 
-import com.google.travel.pages.fligths.searchFligths.tripOption.ticketType.MultiCity;
-import com.google.travel.pages.fligths.searchFligths.tripOption.ticketType.OneWay;
-import com.google.travel.pages.fligths.searchFligths.tripOption.ticketType.RoundTrip;
+
+import com.google.travel.pages.commonFeatures.searchFligths.tripOption.ticketType.MultiCity;
+import com.google.travel.pages.commonFeatures.searchFligths.tripOption.ticketType.OneWay;
+import com.google.travel.pages.commonFeatures.searchFligths.tripOption.ticketType.RoundTrip;
 import org.openqa.selenium.WebDriver;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;

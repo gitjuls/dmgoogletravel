@@ -2,11 +2,10 @@ package com.google.travel.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
-
-public abstract class BasePage {
-
+public class BasePage {
     protected WebDriverWait wait;
     protected WebDriver driver;
 
@@ -14,5 +13,4 @@ public abstract class BasePage {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
-
 }

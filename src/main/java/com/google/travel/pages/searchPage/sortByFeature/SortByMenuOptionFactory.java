@@ -1,4 +1,4 @@
-package com.google.travel.pages.fligths.searchResult.sortBy;
+package com.google.travel.pages.searchPage.sortByFeature;
 
 import org.openqa.selenium.WebElement;
 
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class SortByOptionFactory {
+public class SortByMenuOptionFactory {
 
     private static Predicate<WebElement> bestFlights = element -> element.getAttribute("data-value").equalsIgnoreCase("1");
     private static Predicate<WebElement> price = element -> element.getAttribute("data-value").equalsIgnoreCase("2");

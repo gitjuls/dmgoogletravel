@@ -2,18 +2,19 @@ package com.google.travel.tests.searchFlights;
 
 import com.google.travel.constants.EndPoint;
 import com.google.travel.data.GetTestData;
-import com.google.travel.pages.fligths.searchFligths.SearchFlights;
-import com.google.travel.pages.fligths.searchResult.SearchResult;
+import com.google.travel.pages.fligthsPage.FlightsPage;
+import com.google.travel.pages.searchPage.SearchPage;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 public class NegativeSearchFlightTest extends TestBase {
 
-    private SearchFlights searchFlight;
-    private SearchResult searchResult;
+    private FlightsPage flightsPage;
+    private SearchPage searchPage;
 
     @DataProvider
     public Object[][] getData(){
@@ -25,12 +26,12 @@ public class NegativeSearchFlightTest extends TestBase {
 
     @Test(dataProvider = "getData")
     public void verifyIfSearchResultsReturnedNoResultsOrAlternativeSuggestions(String ticketType, List<String> searchByCode, String expectedAlert) {
-        searchFlight = new SearchFlights(driver, log);
-        searchFlight.navigate(EndPoint.FLIGHTS.endPoint);
-        searchFlight.selectTicketType(ticketType);
-        searchFlight.inputSearchData(searchByCode);
-        searchResult = searchFlight.clickSearchButton();
-        String ExpectedResult = searchResult.searchResult();
+        flightsPage = new FlightsPage(driver);
+        flightsPage.navigate(EndPoint.FLIGHTS.endPoint);
+        flightsPage.searchFlightsFeature.selectTicketType(ticketType);
+        flightsPage.searchFlightsFeature.inputSearchData(searchByCode);
+        searchPage = flightsPage.clickSearchButton();
+        String ExpectedResult = searchPage.searchResult();
         Assert.assertTrue(ExpectedResult.equalsIgnoreCase(expectedAlert));
     }
 }
