@@ -7,7 +7,6 @@ import com.google.travel.pages.searchPage.SearchPage;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
