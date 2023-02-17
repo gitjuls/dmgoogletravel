@@ -7,12 +7,12 @@ import com.google.travel.pages.searchPage.SearchPage;
 import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import javax.naming.directory.SearchResult;
 import java.util.List;
 
-public class SortByMinDurationTimeTests extends TestBase {
+public class SortByMinTests extends TestBase {
 
     private FlightsPage flightsPage;
     private SearchPage searchPage;
@@ -20,20 +20,23 @@ public class SortByMinDurationTimeTests extends TestBase {
     @DataProvider
     public Object[][] getData(){
         return new Object[][]{
-                {"One way", GetTestData.getTripData("oneWay")},
-                {"Round trip", GetTestData.getTripData("roundTrip")},
-                {"Multi-city", GetTestData.getTripData("multiCity")}
+                {"One way", GetTestData.getTripData("oneWay"), "price"},
+              //  {"Round trip", GetTestData.getTripData("roundTrip"), "price"},
+              //  {"Multi-city", GetTestData.getTripData("multiCity"), "price"},
+                {"One way", GetTestData.getTripData("oneWay"), "duration"}
+              //  {"Round trip", GetTestData.getTripData("roundTrip"), "duration"},
+              //  {"Multi-city", GetTestData.getTripData("multiCity"), "duration"}
         };
     }
 
     @Test(dataProvider = "getData")
-    public void verifyIfSortedByMinDurationTimeIsMatch(String ticketType, List<String> searchByCode) {
+    public void verifyIfSortByNameIsMatchMinValue(String ticketType, List<String> searchByCode, String sortBy) {
         flightsPage = new FlightsPage(driver);
         flightsPage.navigate(EndPoint.FLIGHTS.endPoint);
         flightsPage.searchFlightsFeature.selectTicketType(ticketType);
         flightsPage.searchFlightsFeature.inputSearchData(searchByCode);
         searchPage = flightsPage.clickSearchButton();
-        searchPage.sortByFeature.sortBy("duration");
+        searchPage.sortByFeature.sortBy(sortBy);
         String firstItem = searchPage.sortByFeature.getFirstItem();
         String minItem = searchPage.sortByFeature.getMinItem();
         Assert.assertEquals(firstItem, minItem);

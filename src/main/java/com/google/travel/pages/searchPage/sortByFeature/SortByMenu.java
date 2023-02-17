@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 public class SortByMenu extends BasePage {
 
     By sortByButton = By.xpath("//button//span[contains(text(), 'Sort by:')]/..");
-    By sortByMenuItems = By.xpath("//ul[@role='menu']/li");
+    By sortByMenuItems = By.xpath("//ul[@role='menu']/li/span[3]");
     By popUpMenu = By.xpath("//div[@class='GU4XB TiDqEf']//*[@role='button'][@aria-label='Close']");
 
     private SortByInterface sortByInterface;

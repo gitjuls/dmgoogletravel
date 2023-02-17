@@ -8,12 +8,12 @@ import java.util.function.Predicate;
 
 public class SortByMenuOptionFactory {
 
-    private static Predicate<WebElement> bestFlights = element -> element.getAttribute("data-value").equalsIgnoreCase("1");
-    private static Predicate<WebElement> price = element -> element.getAttribute("data-value").equalsIgnoreCase("2");
-    private static Predicate<WebElement> departureTime = element -> element.getAttribute("data-value").equalsIgnoreCase("3");
-    private static Predicate<WebElement> arrivalTime = element -> element.getAttribute("data-value").equalsIgnoreCase("4");
-    private static Predicate<WebElement> duration = element -> element.getAttribute("data-value").equalsIgnoreCase("5");
-    private static Predicate<WebElement> emissions = element -> element.getAttribute("data-value").equalsIgnoreCase("6");
+    private static Predicate<WebElement> bestFlights = element -> element.getText().equalsIgnoreCase("Best Flights");
+    private static Predicate<WebElement> price = element -> element.getText().equalsIgnoreCase("Price");
+    private static Predicate<WebElement> departureTime = element -> element.getText().equalsIgnoreCase("Departure time");
+    private static Predicate<WebElement> arrivalTime = element -> element.getText().equalsIgnoreCase("Arrival time");
+    private static Predicate<WebElement> duration = element -> element.getText().equalsIgnoreCase("Duration");
+    private static Predicate<WebElement> emissions = element -> element.getText().equalsIgnoreCase("Emissions");
 
     private static final Map<String, Predicate<WebElement>> MAP = new HashMap<>();
     static {
