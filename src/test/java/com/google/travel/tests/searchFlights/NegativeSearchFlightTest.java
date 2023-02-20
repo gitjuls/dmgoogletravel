@@ -8,7 +8,6 @@ import com.google.travel.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 public class NegativeSearchFlightTest extends TestBase {
