@@ -20,11 +20,11 @@ public class SortByMinTests extends TestBase {
     public Object[][] getData(){
         return new Object[][]{
                 {"One way", GetTestData.getTripData("oneWay"), "price"},
-              //  {"Round trip", GetTestData.getTripData("roundTrip"), "price"},
-              //  {"Multi-city", GetTestData.getTripData("multiCity"), "price"},
-                {"One way", GetTestData.getTripData("oneWay"), "duration"}
-              //  {"Round trip", GetTestData.getTripData("roundTrip"), "duration"},
-              //  {"Multi-city", GetTestData.getTripData("multiCity"), "duration"}
+                {"Round trip", GetTestData.getTripData("roundTrip"), "price"},
+                {"Multi-city", GetTestData.getTripData("multiCity"), "price"},
+                {"One way", GetTestData.getTripData("oneWay"), "duration"},
+                {"Round trip", GetTestData.getTripData("roundTrip"), "duration"},
+                {"Multi-city", GetTestData.getTripData("multiCity"), "duration"}
         };
     }
 
@@ -40,4 +40,5 @@ public class SortByMinTests extends TestBase {
         String minItem = searchPage.sortByFeature.getMinItem();
         Assert.assertEquals(firstItem, minItem);
     }
+
 }

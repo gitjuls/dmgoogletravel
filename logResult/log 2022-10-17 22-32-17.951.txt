@@ -1,17 +1,17 @@
 [main] 22:32:24,880 INFO  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch START
-[main] 22:32:28,707 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Select Ticket Type One way
+[main] 22:32:28,707 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Select Ticket Type One way
 [main] 22:32:44,587 DEBUG  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch FAIL
 [main] 22:32:44,799 INFO  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch START
-[main] 22:32:46,233 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Select Ticket Type Round trip
-[main] 22:32:48,474 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Input Search Data [DCA, IST]
-[main] 22:32:48,689 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Click Search Button
-[main] 22:32:51,842 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchResult: Click SortBy button
-[main] 22:32:53,252 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchResult: SortBy price
+[main] 22:32:46,233 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Select Ticket Type Round trip
+[main] 22:32:48,474 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Input Search Data [DCA, IST]
+[main] 22:32:48,689 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Click Search Button
+[main] 22:32:51,842 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchResult.SearchResult: Click SortBy button
+[main] 22:32:53,252 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchResult.SearchResult: SortBy price
 [main] 22:32:53,888 INFO  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch PASS
 [main] 22:32:53,888 INFO  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch START
-[main] 22:32:55,206 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Select Ticket Type Multi-city
-[main] 22:33:00,782 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Input Search Data [DCA, TPA, TPA, JFK, JFK, DCA]
-[main] 22:33:00,899 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchFlight: Click Search Button
-[main] 22:33:06,654 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchResult: Click SortBy button
-[main] 22:33:08,131 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.SearchResult: SortBy price
+[main] 22:32:55,206 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Select Ticket Type Multi-city
+[main] 22:33:00,782 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Input Search Data [DCA, TPA, TPA, JFK, JFK, DCA]
+[main] 22:33:00,899 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchFligths.SearchFlights: Click Search Button
+[main] 22:33:06,654 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchResult.SearchResult: Click SortBy button
+[main] 22:33:08,131 INFO  [verifyIfSortedByMinPriceIsMatch] com.google.travel.pages.fligths.searchResult.SearchResult: SortBy price
 [main] 22:33:08,652 INFO  [verifyIfSortedByMinPriceIsMatch] TEST verifyIfSortedByMinPriceIsMatch PASS

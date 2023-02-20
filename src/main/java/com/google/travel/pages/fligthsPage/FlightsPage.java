@@ -22,6 +22,8 @@ public class FlightsPage extends BasePage {
 
     public void navigate(String endPoint){
         driver.get(ConfigLoader.getInstance().getBaseUrl() + endPoint);
+        WebElement body = driver.findElement(By.xpath("//body"));
+        body.click();
     }
 
     public SearchPage clickSearchButton() {
