@@ -17,6 +17,7 @@ import java.util.function.Supplier;
 public class DriverFactory {
     private static final Supplier<WebDriver> chromeSupplier = () -> {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
         WebDriverManager.chromedriver().setup();
         chromeOptions.setHeadless(false);
         return new ChromeDriver(chromeOptions);

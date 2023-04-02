@@ -34,10 +34,19 @@ public class MultiCity extends BasePage implements TripOption {
         }
         List<WebElement> listOfInputFields = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(inputFields, 1));
         for (int i = 0; i < searchData.size(); i++) {
+            actions.moveToElement(listOfInputFields.get(i)).click();
             listOfInputFields.get(i).clear();
-            actions.sendKeys(listOfInputFields.get(i), searchData.get(i)).build().perform();
+            inputStringByChar(searchData.get(i), actions, listOfInputFields.get(i));
             WebElement dropDownList = wait.until(ExpectedConditions.presenceOfElementLocated(this.dropDownList));
             actions.moveToElement(dropDownList).click().build().perform();
         }
+    }
+
+    private void inputStringByChar(String str, Actions actions, WebElement element){
+        int i=0;
+        do{
+            actions.sendKeys(element,String.valueOf(str.charAt(i))).build().perform();
+            i++;
+        }while(i<str.length());
     }
 }

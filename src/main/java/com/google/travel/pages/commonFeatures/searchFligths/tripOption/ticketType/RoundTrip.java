@@ -25,18 +25,28 @@ public class RoundTrip extends BasePage implements TripOption {
         String airportDataCode2 = searchData.get(1);
 
         WebElement whereFrom = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereFrom));
+        actions.moveToElement(whereFrom).click();
         whereFrom.clear();
-        actions.sendKeys(whereFrom,airportDataCode1).build().perform();
+        inputStringByChar(airportDataCode1, actions, whereFrom);
 
         WebElement whereFromDropDownOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode1 +"']")));
         actions.moveToElement(whereFromDropDownOption).click().build().perform();
 
         WebElement whereTo = wait.until(ExpectedConditions.presenceOfElementLocated(this.whereTo));
+        actions.moveToElement(whereTo);
         whereTo.clear();
         actions.sendKeys(whereTo,airportDataCode2).build().perform();
 
         WebElement whereToDropDownOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@role='listbox']/li[@data-code = '"+ airportDataCode2 +"']")));
         actions.moveToElement(whereToDropDownOption).click().build().perform();
+    }
+
+    private void inputStringByChar(String str, Actions actions, WebElement element){
+        int i=0;
+        do{
+            actions.sendKeys(element,String.valueOf(str.charAt(i))).build().perform();
+            i++;
+        }while(i<str.length());
     }
 
 }
