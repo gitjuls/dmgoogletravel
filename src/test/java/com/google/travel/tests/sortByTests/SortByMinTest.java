@@ -5,6 +5,7 @@ import com.google.travel.data.GetTestData;
 import com.google.travel.pages.fligthsPage.FlightsPage;
 import com.google.travel.pages.searchPage.SearchPage;
 import com.google.travel.tests.TestBase;
+import com.google.travel.utilities.DataLoader;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,13 +19,14 @@ public class SortByMinTest extends TestBase {
 
     @DataProvider
     public Object[][] getData(){
+        String fileName = "searchTestPositiveData";
         return new Object[][]{
-                {"One way", GetTestData.getTripData("oneWay"), "price"},
-                {"Round trip", GetTestData.getTripData("roundTrip"), "price"},
-                {"Multi-city", GetTestData.getTripData("multiCity"), "price"},
-                {"One way", GetTestData.getTripData("oneWay"), "duration"},
-                {"Round trip", GetTestData.getTripData("roundTrip"), "duration"},
-                {"Multi-city", GetTestData.getTripData("multiCity"), "duration"}
+                {"One way", DataLoader.getInstance(fileName).getData("oneWay"),"price"},
+                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip"),"price"},
+                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity"),"price"},
+                {"One way", DataLoader.getInstance(fileName).getData("oneWay"),"duration"},
+                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip"),"duration"},
+                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity"),"duration"}
         };
     }
 
