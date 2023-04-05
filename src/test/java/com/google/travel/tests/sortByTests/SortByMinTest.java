@@ -31,11 +31,11 @@ public class SortByMinTest extends TestBase {
     }
 
     @Test(dataProvider = "getData")
-    public void verifyIfSortByNameIsMatchMinValue(String ticketType, List<String> searchByCode, String sortBy) {
+    public void verifyIfSortByNameIsMatchMinValue(String ticketType, List<String> codeList, String sortBy) {
         flightsPage = new FlightsPage(driver);
         flightsPage.navigate(EndPoint.FLIGHTS.endPoint);
         flightsPage.searchFlightsFeature.selectTicketType(ticketType);
-        flightsPage.searchFlightsFeature.inputSearchData(searchByCode);
+        flightsPage.searchFlightsFeature.inputSearchData(codeList);
         searchPage = flightsPage.clickSearchButton();
         searchPage.sortByFeature.sortBy(sortBy);
         String firstItem = searchPage.sortByFeature.getFirstItem();

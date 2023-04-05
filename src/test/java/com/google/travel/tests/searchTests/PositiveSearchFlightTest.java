@@ -28,11 +28,11 @@ public class PositiveSearchFlightTest extends TestBase {
     }
 
     @Test(dataProvider = "getData")
-    public void verifyIfSearchResultsReturned(String ticketType, List<String> searchByCode) {
+    public void verifyIfSearchResultsReturned(String ticketType, List<String> codeList) {
         flightsPage = new FlightsPage(driver);
         flightsPage.navigate(EndPoint.FLIGHTS.endPoint);
         flightsPage.searchFlightsFeature.selectTicketType(ticketType);
-        flightsPage.searchFlightsFeature.inputSearchData(searchByCode);
+        flightsPage.searchFlightsFeature.inputSearchData(codeList);
         searchPage = flightsPage.clickSearchButton();
         String ExpectedResult = searchPage.searchResult();
         Assert.assertFalse(ExpectedResult.contains("No results"));
