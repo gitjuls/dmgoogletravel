@@ -5,6 +5,7 @@ import com.google.travel.data.*;
 import com.google.travel.pages.fligthsPage.FlightsPage;
 import com.google.travel.pages.searchPage.SearchPage;
 import com.google.travel.tests.TestBase;
+import com.google.travel.utilities.DataLoader;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,10 +19,11 @@ public class PositiveSearchFlightTest extends TestBase {
 
     @DataProvider
     public Object[][] getData(){
+        String fileName = "searchTestPositiveData";
         return new Object[][]{
-                {"One way", GetTestData.getTripData("oneWay")},
-                {"Round trip", GetTestData.getTripData("roundTrip")},
-                {"Multi-city", GetTestData.getTripData("multiCity")}
+                {"One way", DataLoader.getInstance(fileName).getData("oneWay")},
+                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip")},
+                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity")}
         };
     }
 
