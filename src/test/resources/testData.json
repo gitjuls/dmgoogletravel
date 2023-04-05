@@ -4,10 +4,10 @@
           "tripPath": "DCA => TPA"
         },
       "roundTrip": {
-          "tripPath": "DCA => IST",
+          "tripPath": "DCA => TPA",
           "negativeData": [
             {
-              "tripPath": "DCA => ISL",
+              "tripPath": "DCA => TTT",
               "message": "No results returned, alternative suggestions found."
             },
             {

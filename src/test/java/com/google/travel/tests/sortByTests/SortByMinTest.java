@@ -1,4 +1,4 @@
-package com.google.travel.tests.sortBy;
+package com.google.travel.tests.sortByTests;
 
 import com.google.travel.constants.EndPoint;
 import com.google.travel.data.GetTestData;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class SortByMinTests extends TestBase {
+public class SortByMinTest extends TestBase {
 
     private FlightsPage flightsPage;
     private SearchPage searchPage;

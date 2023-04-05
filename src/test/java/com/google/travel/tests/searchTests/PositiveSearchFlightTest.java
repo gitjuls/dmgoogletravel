@@ -1,4 +1,4 @@
-package com.google.travel.tests.searchFlights;
+package com.google.travel.tests.searchTests;
 
 import com.google.travel.constants.EndPoint;
 import com.google.travel.data.*;
