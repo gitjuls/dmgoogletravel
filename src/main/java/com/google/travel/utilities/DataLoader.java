@@ -31,7 +31,7 @@ public class DataLoader {
         if(prop != null) {
             List<String> list = splitPath(prop);
             return list;
-        } else throw new RuntimeException("property "+tripType+" is not specified in the searchTestPositiveData.properties file");
+        } else throw new RuntimeException("property "+tripType+" is not specified in the "+fileName+".properties file");
     }
 
 
