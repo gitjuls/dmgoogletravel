@@ -21,12 +21,12 @@ public class SortByMinTest extends TestBase {
     public Object[][] getData(){
         String fileName = "searchTestPositiveData";
         return new Object[][]{
-                {"One way", DataLoader.getInstance(fileName).getData("oneWay"),"price"},
-                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip"),"price"},
-                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity"),"price"},
-                {"One way", DataLoader.getInstance(fileName).getData("oneWay"),"duration"},
-                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip"),"duration"},
-                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity"),"duration"}
+                {"One way", DataLoader.getInstance(fileName).getPath("oneWay"),"price"},
+                {"Round trip", DataLoader.getInstance(fileName).getPath("roundTrip"),"price"},
+                {"Multi-city", DataLoader.getInstance(fileName).getPath("multiCity"),"price"},
+                {"One way", DataLoader.getInstance(fileName).getPath("oneWay"),"duration"},
+                {"Round trip", DataLoader.getInstance(fileName).getPath("roundTrip"),"duration"},
+                {"Multi-city", DataLoader.getInstance(fileName).getPath("multiCity"),"duration"}
         };
     }
 

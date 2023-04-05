@@ -24,7 +24,7 @@ public class DataLoader {
         return dataLoader;
     }
 
-    public List<String> getData(String tripType){
+    public List<String> getPath(String tripType){
         String prop = properties.getProperty(tripType);
         if(prop != null) {
             List<String> list = splitPath(prop);

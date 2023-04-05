@@ -21,9 +21,9 @@ public class PositiveSearchFlightTest extends TestBase {
     public Object[][] getData(){
         String fileName = "searchTestPositiveData";
         return new Object[][]{
-                {"One way", DataLoader.getInstance(fileName).getData("oneWay")},
-                {"Round trip", DataLoader.getInstance(fileName).getData("roundTrip")},
-                {"Multi-city", DataLoader.getInstance(fileName).getData("multiCity")}
+                {"One way", DataLoader.getInstance(fileName).getPath("oneWay")},
+                {"Round trip", DataLoader.getInstance(fileName).getPath("roundTrip")},
+                {"Multi-city", DataLoader.getInstance(fileName).getPath("multiCity")}
         };
     }
 
